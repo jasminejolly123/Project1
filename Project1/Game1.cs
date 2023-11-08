@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.ImGui;
 using System.Collections.Generic;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Project1
 {
@@ -14,7 +15,7 @@ namespace Project1
         private Texture2D _pacman;
         private Vector2 _pacmanposition;
         private Vector2 _blockposition;
-        private ShapeBatcher _shapeBatcher;
+        //private ShapeBatcher _shapeBatcher;
 
         public Game1()
         {
@@ -34,8 +35,8 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //_pacman = Content.Load<Texture2D>("pacman_PNG25");
-            //_pacmanposition = Vector2.Zero;
+            _pacman = Content.Load<Texture2D>("R");
+            _pacmanposition = Vector2.Zero;
             // TODO: use this.Content to load your game content here
             _blockposition = new Vector2(300, 400);
         }
@@ -44,6 +45,27 @@ namespace Project1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                _pacmanposition.Y = _pacmanposition.Y - 5;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                _pacmanposition.Y = _pacmanposition.Y + 5;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                _pacmanposition.X = _pacmanposition.X - 5;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                _pacmanposition.X = _pacmanposition.X + 5;
+            }
 
             // TODO: Add your update logic here
 
@@ -56,10 +78,10 @@ namespace Project1
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            //_spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
+            _spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
             _spriteBatch.End();
 
-            _shapeBatcher.DrawRectangle(50, 30, Color.White);
+            //_shapeBatcher.DrawRectangle(50, 30, Color.White);
             base.Draw(gameTime);
         }
     }
