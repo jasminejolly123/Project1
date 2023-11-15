@@ -16,8 +16,9 @@ namespace Project1
         private Vector2 _pacmanposition;
         private Vector2 _blockposition;
         Texture2D coverUp;
-        private Texture2D PacmanTexture, WallTexture;
-        private Rectangle Pacman, Wall1;
+        private Texture2D PacmanTexture, WallTexture, PinkTexture, RedTexture, BlueTexture, OrangeTexture;
+        private Rectangle Pacman, Red, Pink, Blue, Orange;
+        private Rectangle Wall1;
         private Rectangle Wall2;
         private Rectangle Wall3;
         private Rectangle Wall4;
@@ -78,8 +79,16 @@ namespace Project1
 
             PacmanTexture = Content.Load<Texture2D>("R");
             WallTexture = Content.Load<Texture2D>("dirt");
+            PinkTexture = Content.Load<Texture2D>("pinkghost");
+            BlueTexture = Content.Load<Texture2D>("blue ghost");
+            OrangeTexture = Content.Load<Texture2D>("orange ghost");
+            RedTexture = Content.Load<Texture2D>("red ghost");
             Speed = 2;
             Pacman = new Rectangle(0, 0, 30, 30);
+            Pink = new Rectangle(760, 0, 30, 30);
+            Red = new Rectangle(760, 0, 30, 30);
+            Blue = new Rectangle(760, 0, 30, 30);
+            Orange = new Rectangle(760, 0, 30, 30);
             Wall1 = new Rectangle(0, 80, 80, 40);
             Wall2 = new Rectangle(0, 400, 80, 80);
             Wall3 = new Rectangle(164, 0, 40, 112);
@@ -106,6 +115,32 @@ namespace Project1
             Wall24 = new Rectangle(648, 384, 60, 52);
             //Position = Wall.Center.ToVector2();
 
+            //List<Rectangle> walls = new List<Rectangle>();
+
+            //walls.Add(Wall1);
+            //walls.Add(Wall2);
+            //walls.Add(Wall3);
+            //walls.Add(Wall4);
+            //walls.Add(Wall5);
+            //walls.Add(Wall6);
+            //walls.Add(Wall7);
+            //walls.Add(Wall8);
+            //walls.Add(Wall9);
+            //walls.Add(Wall10);
+            //walls.Add(Wall11);
+            //walls.Add(Wall12);
+            //walls.Add(Wall13);
+            //walls.Add(Wall14);
+            //walls.Add(Wall15);
+            //walls.Add(Wall16);
+            //walls.Add(Wall17);
+            //walls.Add(Wall18);
+            //walls.Add(Wall19);
+            //walls.Add(Wall20);
+            //walls.Add(Wall21);
+            //walls.Add(Wall22);
+            //walls.Add(Wall23);
+            //walls.Add(Wall24);
         }
 
         protected override void Update(GameTime gameTime)
@@ -152,36 +187,57 @@ namespace Project1
 
             Direction += Acceleration;
 
-            Position += Direction; //Postition
-                                   //Check for Intersectrion
-                                   // TODO: Add your update logic here
+            Position += Direction;
 
-            //if (Wall.Intersects(Pacman))
-            //{
-            //    //Intersection is true. Now add the bouncing logic
+            List<Rectangle> walls = new List<Rectangle>();
 
-            //    //First, clip the box so that it is inside the wall
-            if (Pacman.Left > Wall1.Left) Position.X = Wall1.X + 1;
-            if (Pacman.Top > Wall1.Top) Position.Y = Wall1.Y + 1;
-            if (Pacman.Right < Wall1.Right) Position.X = Wall1.Right - Pacman.Width - 1;
-            if (Pacman.Bottom < Wall1.Bottom) Position.Y = Wall1.Bottom - Pacman.Height - 1;
+            walls.Add(Wall1);
+            walls.Add(Wall2);
+            walls.Add(Wall3);
+            walls.Add(Wall4);
+            walls.Add(Wall5);
+            walls.Add(Wall6);
+            walls.Add(Wall7);
+            walls.Add(Wall8);
+            walls.Add(Wall9);
+            walls.Add(Wall10);
+            walls.Add(Wall11);
+            walls.Add(Wall12);
+            walls.Add(Wall13);
+            walls.Add(Wall14);
+            walls.Add(Wall15);
+            walls.Add(Wall16);
+            walls.Add(Wall17);
+            walls.Add(Wall18);
+            walls.Add(Wall19);
+            walls.Add(Wall20);
+            walls.Add(Wall21);
+            walls.Add(Wall22);
+            walls.Add(Wall23);
+            walls.Add(Wall24);
 
-            if (Pacman.X < 80 && Pacman.Y < 120 && Pacman.Y > 80)
-            {
-                Acceleration = Acceleration * 0;
+            foreach (Rectangle rectangle in walls)
+            { 
+                if (Pacman.X < rectangle.Right && Pacman.Y > (rectangle.Top) && Pacman.Y < rectangle.Bottom)
+                {
+                    Pacman.X = Pacman.X + 5;
+                }
+
+                if (Pacman.X > rectangle.Left && Pacman.Y > (rectangle.Top) && Pacman.Y < rectangle.Bottom)
+                {
+                    Pacman.X = Pacman.X - 5;
+                }
+
+                if (Pacman.Y == rectangle.Bottom && Pacman.X < rectangle.Right && Pacman.X > -5)
+                {
+                    Pacman.Y = Pacman.Y - 5;
+                }
+
+                if (Pacman.Y == rectangle.Top && Pacman.X < rectangle.Right && Pacman.X > -5)
+                {
+                    Pacman.Y = Pacman.Y + 5;
+                }
             }
-
-            //    //Now, make the direction change
-
-            //    if (Pacman.Left < Wall.Left || Pacman.Right > Wall.Right) Direction.X *= -1;
-            //    if (Pacman.Top < Wall.Top || Pacman.Bottom > Wall.Bottom) Direction.Y *= -1;
-
-            //    Direction *= 2;//For True rebound
-            //}
-
-            //Pacman.X = (int)Position.X;
-            //Pacman.Y = (int)Position.Y;
-
             base.Update(gameTime);
         }
 
