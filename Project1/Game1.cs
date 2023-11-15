@@ -189,7 +189,9 @@ namespace Project1
 
             Position += Direction;
 
-            List<Rectangle> walls = new List<Rectangle>();
+            //if (Wall.Intersects(Pacman))
+            //{
+            //    //Intersection is true. Now add the bouncing logic
 
             walls.Add(Wall1);
             walls.Add(Wall2);
