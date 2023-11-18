@@ -13,11 +13,11 @@ namespace Project1
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _pacman;
-        private Vector2 _pacmanposition;
-        private Vector2 _blockposition;
+        public Vector2 _pacmanposition;
+        public Vector2 _blockposition;
         Texture2D coverUp;
-        private Texture2D PacmanTexture, WallTexture, PinkTexture, RedTexture, BlueTexture, OrangeTexture;
-        private Rectangle Pacman, Red, Pink, Blue, Orange;
+        public Texture2D PacmanTexture, WallTexture, PinkTexture, RedTexture, BlueTexture, OrangeTexture;
+        public Rectangle Pacman, Red, Pink, Blue, Orange;
         private Rectangle Wall1;
         private Rectangle Wall2;
         private Rectangle Wall3;
@@ -42,8 +42,8 @@ namespace Project1
         private Rectangle Wall22;
         private Rectangle Wall23;
         private Rectangle Wall24;
-        private Vector2 Position, Direction, Acceleration;
-        float Speed;
+        public Vector2 Position, Direction, Acceleration;
+        public float Speed;
         //private ShapeBatcher _shapeBatcher;
 
         public Game1()
@@ -113,34 +113,8 @@ namespace Project1
             Wall22 = new Rectangle(432, 36, 120, 40);
             Wall23 = new Rectangle(432, 224, 240, 40);
             Wall24 = new Rectangle(648, 384, 60, 52);
-            //Position = Wall.Center.ToVector2();
+            
 
-            //List<Rectangle> walls = new List<Rectangle>();
-
-            //walls.Add(Wall1);
-            //walls.Add(Wall2);
-            //walls.Add(Wall3);
-            //walls.Add(Wall4);
-            //walls.Add(Wall5);
-            //walls.Add(Wall6);
-            //walls.Add(Wall7);
-            //walls.Add(Wall8);
-            //walls.Add(Wall9);
-            //walls.Add(Wall10);
-            //walls.Add(Wall11);
-            //walls.Add(Wall12);
-            //walls.Add(Wall13);
-            //walls.Add(Wall14);
-            //walls.Add(Wall15);
-            //walls.Add(Wall16);
-            //walls.Add(Wall17);
-            //walls.Add(Wall18);
-            //walls.Add(Wall19);
-            //walls.Add(Wall20);
-            //walls.Add(Wall21);
-            //walls.Add(Wall22);
-            //walls.Add(Wall23);
-            //walls.Add(Wall24);
         }
 
         protected override void Update(GameTime gameTime)
@@ -192,6 +166,8 @@ namespace Project1
             //if (Wall.Intersects(Pacman))
             //{
             //    //Intersection is true. Now add the bouncing logic
+
+            List<Rectangle> walls = new List<Rectangle>();
 
             walls.Add(Wall1);
             walls.Add(Wall2);
@@ -275,6 +251,10 @@ namespace Project1
             _spriteBatch.Draw(WallTexture, Wall23, Color.BlueViolet);
             _spriteBatch.Draw(WallTexture, Wall24, Color.BlueViolet);
             _spriteBatch.Draw(PacmanTexture, Pacman, Color.White);
+            //_spriteBatch.Draw(PinkTexture, Pink, Color.White);
+            //_spriteBatch.Draw(RedTexture, Red, Color.White);
+            //_spriteBatch.Draw(BlueTexture, Blue, Color.White);
+            //_spriteBatch.Draw(OrangeTexture, Orange, Color.White);
             //_spriteBatch.Draw(coverUp, new Rectangle(50, 50, 20, 15), Color.Blue);
             //_spriteBatch.Draw(coverUp, new Rectangle(0, GameData.TileSize.Y * GameData.TileCount.Y + GameData.LevelOffset.Y, GameData.TileCount.X * GameData.TileSize.X, 50), Color.Blue);
             _spriteBatch.End();
