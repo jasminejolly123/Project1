@@ -11,7 +11,7 @@ namespace Project1
     public class Ghost : Game1
     {
         public Movement MoveAI { get; set; }
-        public Ghost()
+        public Ghost(Texture2D tex, Vector2 pos)
         {
             Speed = 250;
         }

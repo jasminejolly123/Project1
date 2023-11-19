@@ -219,7 +219,7 @@ namespace Project1
             base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime gametime)
         {
             GraphicsDevice.Clear(Color.Black);
 

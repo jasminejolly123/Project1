@@ -18,10 +18,24 @@ namespace Project1
             ai.AddPoint(new(400, 400));
             ai.AddPoint(new(100, 400));
 
-            _ghosts.Add(PinkTexture, new(50, 50)
+            _ghosts.Add(new (PinkTexture, new(50, 50))
             {
                 MoveAI = ai
             });
+        }
+        public void Update()
+        {
+            foreach (var ghost in _ghosts)
+            {
+                ghost.Update();
+            }
+        }
+        public void Draw()
+        {
+            foreach (var ghost in _ghosts)
+            {
+                ghost.Draw();
+            }
         }
     }
 }
