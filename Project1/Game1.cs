@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.ImGui;
+using System;
 using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -11,7 +12,7 @@ namespace Project1
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public SpriteBatch _spriteBatch;
         private Texture2D _pacman;
         public Vector2 _pacmanposition;
         public Vector2 _blockposition;
@@ -44,6 +45,9 @@ namespace Project1
         private Rectangle Wall24;
         public Vector2 Position, Direction, Acceleration;
         public float Speed;
+        private GameTime gameTime;
+        
+
         //private ShapeBatcher _shapeBatcher;
 
         public Game1()
@@ -64,18 +68,8 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //_pacman = Content.Load<Texture2D>("R");
-            //_pacmanposition = Vector2.Zero;
-            //// TODO: use this.Content to load your game content here
-            //_blockposition = new Vector2(300, 400);
-
-            //Color[] c = new Color[] { Color.White };
-            //coverUp = new Texture2D(GraphicsDevice, 1, 1);
-            //coverUp.SetData(c);
-
-            //GameData.LevelOffset = new Point(0, 150);
-            //GameData.TileCount = new Point(28, 31);
-            //GameData.TileSize = new Point(24);
+            _pacman = Content.Load<Texture2D>("R");
+            _pacmanposition = Vector2.Zero;
 
             PacmanTexture = Content.Load<Texture2D>("R");
             WallTexture = Content.Load<Texture2D>("dirt");
@@ -113,10 +107,11 @@ namespace Project1
             Wall22 = new Rectangle(432, 36, 120, 40);
             Wall23 = new Rectangle(432, 224, 240, 40);
             Wall24 = new Rectangle(648, 384, 60, 52);
-            
 
+           
         }
 
+       
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -195,29 +190,33 @@ namespace Project1
             walls.Add(Wall24);
 
             foreach (Rectangle rectangle in walls)
-            { 
-                if (Pacman.X < rectangle.Right && Pacman.Y > (rectangle.Top) && Pacman.Y < rectangle.Bottom)
+            {
+                if (_pacmanposition.X < rectangle.Right && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
                 {
-                    Pacman.X = Pacman.X + 5;
+                    _pacmanposition.X = _pacmanposition.X + 5;
                 }
 
-                if (Pacman.X > rectangle.Left && Pacman.Y > (rectangle.Top) && Pacman.Y < rectangle.Bottom)
+                if (_pacmanposition.X > rectangle.Left && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
                 {
-                    Pacman.X = Pacman.X - 5;
+                    _pacmanposition.X = _pacmanposition.X - 5;
                 }
 
-                if (Pacman.Y == rectangle.Bottom && Pacman.X < rectangle.Right && Pacman.X > -5)
+                if (_pacmanposition.Y == rectangle.Bottom && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
                 {
-                    Pacman.Y = Pacman.Y - 5;
+                    _pacmanposition.Y = _pacmanposition.Y - 5;
                 }
 
-                if (Pacman.Y == rectangle.Top && Pacman.X < rectangle.Right && Pacman.X > -5)
+                if (_pacmanposition.Y == rectangle.Top && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
                 {
-                    Pacman.Y = Pacman.Y + 5;
+                    _pacmanposition.Y = _pacmanposition.Y + 5;
                 }
             }
             base.Update(gameTime);
-        }
+
+
+        
+
+    }
 
         protected override void Draw(GameTime gametime)
         {
@@ -225,7 +224,7 @@ namespace Project1
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            //_spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
+            _spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
             _spriteBatch.Draw(WallTexture, Wall1, Color.BlueViolet);
             _spriteBatch.Draw(WallTexture, Wall2, Color.BlueViolet);
             _spriteBatch.Draw(WallTexture, Wall3, Color.BlueViolet);
