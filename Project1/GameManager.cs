@@ -5,15 +5,17 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.ImGui;
 using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
+using Microsoft.Xna.Framework.Content;
 namespace Project1
 {
-    public class GameManager : Game1
+    public class GameManager 
     {
         private readonly List<Ghost> _ghosts = new();
-        public GameManager()
-        { 
 
-            var ghosttexture = Content.Load<Texture2D>("pinkghost");
+        public GameManager()
+        {
+
+            var ghosttexture = Globals.content.Load<Texture2D>("pinkghost");
 
             var ai = new Around();
             ai.AddPoint(new(100, 100));
@@ -33,12 +35,12 @@ namespace Project1
                 ghost.Update();
             }
         }
-        //public void Draw()
-        //{
-        //    foreach (var ghost in _ghosts)
-        //    {
-        //        ghost.Draw();
-        //    }
-        //}
+        public void Draw(SpriteBatch _spritebatch)
+        {
+            foreach (var ghost in _ghosts)
+            {
+                ghost.Draw(_spritebatch);
+            }
+        }
     }
 }

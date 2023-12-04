@@ -47,6 +47,8 @@ namespace Project1
         public Vector2 Position, Direction, Acceleration;
         public float Speed;
         private readonly List<Ghost> _ghosts = new();
+        public Texture2D ghosttexture;
+
 
 
         //private ShapeBatcher _shapeBatcher;
@@ -111,21 +113,20 @@ namespace Project1
             _walls.Add(new Rectangle(432, 224, 240, 40));
             _walls.Add(new Rectangle(648, 384, 60, 52));
 
-            
+            ghosttexture = Globals.content.Load<Texture2D>("pinkghost");
 
-                var ghosttexture = Content.Load<Texture2D>("pinkghost");
+            var ai = new Around();
+            ai.AddPoint(new(100, 100));
+            ai.AddPoint(new(400, 100));
+            ai.AddPoint(new(400, 400));
+            ai.AddPoint(new(100, 400));
 
-                var ai = new Around();
-                ai.AddPoint(new(100, 100));
-                ai.AddPoint(new(400, 100));
-                ai.AddPoint(new(400, 400));
-                ai.AddPoint(new(100, 400));
+            _ghosts.Add(new(ghosttexture, new(50, 50))
+            {
+                MoveAI = ai
+            });
 
-                _ghosts.Add(new(ghosttexture, new(750, 50))
-                {
-                    MoveAI = ai
-                });
-            
+
         }
 
 
@@ -205,14 +206,14 @@ namespace Project1
                 }
                 base.Update(gameTime);
 
-                foreach (var ghost in _ghosts)
-                {
-                    ghost.Update();
-                }
+
+            foreach (var ghost in _ghosts)
+            {
+                ghost.Update();
+            }
 
 
 
-            
         }
 
         protected override void Draw(GameTime gameTime)
@@ -252,11 +253,16 @@ namespace Project1
             {
                 _spriteBatch.Draw(WallTexture, wall, Color.BlueViolet);
             }
+            //foreach (var ghost in _ghosts)
+            //{
+            //    _spriteBatch.Draw(ghosttexture, ghost, Color.White);
+            //}
 
             foreach (var ghost in _ghosts)
             {
                 ghost.Draw(_spriteBatch);
             }
+
             ////_spriteBatch.Draw(PinkTexture, Pink, Color.White);
             ////_spriteBatch.Draw(RedTexture, Red, Color.White);
             ////_spriteBatch.Draw(BlueTexture, Blue, Color.White);

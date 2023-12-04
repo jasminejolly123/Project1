@@ -19,10 +19,9 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace Project1
 {
-    class Enemy : Game1
+    class Enemy 
     {
         private Vector2 position;
-        protected int health;
         protected int speed;
         protected int radius;
 
@@ -31,12 +30,6 @@ namespace Project1
         public static List<Enemy> enemies = new List<Enemy>();
         private float distanceToPlayer;
 
-        public int Health
-        {
-            get { return health; }
-            set { health = value; }
-
-        }
 
         public Vector2 Position
         {
@@ -82,14 +75,11 @@ namespace Project1
 
 
         }
-        public void Draw(GameTime gametime)
+        public void Draw(SpriteBatch _spritebatch)
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(PinkTexture, Pink, Color.White);
-            _spriteBatch.End();
+            
+            _spritebatch.Draw(Globals.content.Load<Texture2D>("pinkghost"), new Vector2(750, 20), Color.White);
+            
         }
     }
 
@@ -100,20 +90,45 @@ namespace Project1
         {
             speed = 160;
             radius = 42;
-            health = 3;
-            texture2D = Content.Load<Texture2D>("pinkghost");
+            texture2D = Globals.content.Load<Texture2D>("pinkghost");
 
             //state = 0;
         }
     }
 
-    class Eye : Enemy
+    class Orange : Enemy
     {
-        public Eye(Vector2 newPos) : base(newPos)
+        public Orange(Vector2 newPos, Texture2D texture2D) : base(newPos)
         {
-            speed = 80;
-            radius = 45;
-            health = 5;
+            speed = 160;
+            radius = 42;
+            texture2D = Globals.content.Load<Texture2D>("orange ghost");
+
+            //state = 0;
+        }
+
+    }
+
+    class Blue : Enemy
+    {
+        public Blue(Vector2 newPos, Texture2D texture2D) : base(newPos)
+        {
+            speed = 160;
+            radius = 42;
+            texture2D = Globals.content.Load<Texture2D>("blue ghost");
+
+            //state = 0;
+        }
+
+    }
+
+    class Red : Enemy
+    {
+        public Red(Vector2 newPos, Texture2D texture2D) : base(newPos)
+        {
+            speed = 160;
+            radius = 42;
+            texture2D = Globals.content.Load<Texture2D>("red ghost");
 
             //state = 0;
         }
