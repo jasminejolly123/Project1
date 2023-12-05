@@ -12,8 +12,13 @@ namespace Project1
 {
     public static class Globals
     {
+        public static float TotalSeconds { get; set; }
         public static ContentManager content {  get; set; }
         public static SpriteBatch spritebatch { get; set; }
 
+        public static void Update(GameTime gameTime)
+        {
+            TotalSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
     }
 }

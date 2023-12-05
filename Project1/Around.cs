@@ -17,7 +17,7 @@ namespace Project1
             _path.Add(point);
         }
 
-        public override void Move(Ghost ghost)
+        public override void Move(Sprite ghost )
         {
             if (_path.Count < 1) return;
 
@@ -26,7 +26,7 @@ namespace Project1
             if (dir.Length() > 4)
             {
                 dir.Normalize();
-                ghost.Position += dir * ghost.Speed;
+                ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
             }
             else
             {

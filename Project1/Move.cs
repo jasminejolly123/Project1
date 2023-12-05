@@ -10,6 +10,6 @@ namespace Project1
 {
     public abstract class Movement
     {
-        public abstract void Move(Ghost ghost);
+        public abstract void Move(Sprite ghost);
     }
 }

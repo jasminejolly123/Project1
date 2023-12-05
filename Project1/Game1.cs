@@ -12,6 +12,7 @@ namespace Project1
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
+        public GameManager _gameManager;
         public SpriteBatch _spriteBatch;
         private Texture2D _pacman;
         public Vector2 _pacmanposition;
@@ -46,8 +47,8 @@ namespace Project1
         //private Rectangle Wall24;
         public Vector2 Position, Direction, Acceleration;
         public float Speed;
-        private readonly List<Ghost> _ghosts = new();
-        public Texture2D ghosttexture;
+        private readonly List<Sprite> _ghosts = new();
+        //public Texture2D ghosttexture;
 
 
 
@@ -69,6 +70,7 @@ namespace Project1
 
         protected override void LoadContent()
         {
+            Globals.content = Content;
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _pacman = Content.Load<Texture2D>("R");
@@ -113,18 +115,9 @@ namespace Project1
             _walls.Add(new Rectangle(432, 224, 240, 40));
             _walls.Add(new Rectangle(648, 384, 60, 52));
 
-            ghosttexture = Globals.content.Load<Texture2D>("pinkghost");
+            
 
-            var ai = new Around();
-            ai.AddPoint(new(100, 100));
-            ai.AddPoint(new(400, 100));
-            ai.AddPoint(new(400, 400));
-            ai.AddPoint(new(100, 400));
-
-            _ghosts.Add(new(ghosttexture, new(50, 50))
-            {
-                MoveAI = ai
-            });
+            _gameManager = new GameManager();
 
 
         }
@@ -206,12 +199,13 @@ namespace Project1
                 }
                 base.Update(gameTime);
 
+            _gameManager.Update();
+            //foreach (var ghost in _ghosts)
+            //{
+            //    ghost.Update();
+            //}
 
-            foreach (var ghost in _ghosts)
-            {
-                ghost.Update();
-            }
-
+            
 
 
         }
@@ -258,15 +252,17 @@ namespace Project1
             //    _spriteBatch.Draw(ghosttexture, ghost, Color.White);
             //}
 
-            foreach (var ghost in _ghosts)
-            {
-                ghost.Draw(_spriteBatch);
-            }
+            //foreach (var ghost in _ghosts)
+            //{
+            //    ghost.Draw(_spriteBatch);
+            //}
 
             ////_spriteBatch.Draw(PinkTexture, Pink, Color.White);
             ////_spriteBatch.Draw(RedTexture, Red, Color.White);
             ////_spriteBatch.Draw(BlueTexture, Blue, Color.White);
             ////_spriteBatch.Draw(OrangeTexture, Orange, Color.White);
+
+            _gameManager.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

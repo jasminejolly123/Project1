@@ -10,11 +10,12 @@ namespace Project1
 {
     public class GameManager 
     {
-        private readonly List<Ghost> _ghosts = new();
+        private readonly Pacman _player;
+        private readonly List<Sprite> _ghosts = new();
 
         public GameManager()
         {
-
+            _player = new(Globals.content.Load<Texture2D>("R"), new(600, 600));
             var ghosttexture = Globals.content.Load<Texture2D>("pinkghost");
 
             var ai = new Around();
@@ -23,13 +24,15 @@ namespace Project1
             ai.AddPoint(new(400, 400));
             ai.AddPoint(new(100, 400));
 
-            _ghosts.Add(new (ghosttexture, new(50, 50))
+            _ghosts.Add(new (ghosttexture, new(0, 0))
             {
                 MoveAI = ai
             });
         }
         public void Update()
         {
+            InputManager.Update();
+            _player.Update();
             foreach (var ghost in _ghosts)
             {
                 ghost.Update();
