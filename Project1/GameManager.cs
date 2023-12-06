@@ -18,15 +18,23 @@ namespace Project1
             _player = new(Globals.content.Load<Texture2D>("R"), new(600, 600));
             var ghosttexture = Globals.content.Load<Texture2D>("pinkghost");
 
-            var ai = new Around();
-            ai.AddPoint(new(100, 100));
-            ai.AddPoint(new(400, 100));
-            ai.AddPoint(new(400, 400));
-            ai.AddPoint(new(100, 400));
+            //var ai = new Around();
+            //ai.AddPoint(new(100, 100));
+            //ai.AddPoint(new(400, 100));
+            //ai.AddPoint(new(400, 400));
+            //ai.AddPoint(new(100, 400));
 
-            _ghosts.Add(new (ghosttexture, new(0, 0))
+            //_ghosts.Add(new (ghosttexture, new(50, 50))
+            //{
+            //    MoveAI = ai
+            //});
+
+            _ghosts.Add(new(ghosttexture, new(50, 350))
             {
-                MoveAI = ai
+                MoveAI = new Follow
+                {
+                    Target = _player
+                }
             });
         }
         public void Update()

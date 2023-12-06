@@ -12,7 +12,7 @@ namespace Project1
 {
     public class Ghost : Sprite
     {
-        public Movement moveAI { get; set; }
+        public Movement MoveAI { get; set; }
 
         public Ghost(Texture2D tex, Vector2 pos) : base(tex, pos)
         {
@@ -21,7 +21,7 @@ namespace Project1
 
         public void Update()
         {
-            moveAI.Move(this);
+            MoveAI.Move(this);
         }
     }
 }

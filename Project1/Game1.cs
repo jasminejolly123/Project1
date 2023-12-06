@@ -118,8 +118,7 @@ namespace Project1
             
 
             _gameManager = new GameManager();
-
-
+            
         }
 
 
@@ -200,10 +199,7 @@ namespace Project1
                 base.Update(gameTime);
 
             _gameManager.Update();
-            //foreach (var ghost in _ghosts)
-            //{
-            //    ghost.Update();
-            //}
+            
 
             
 

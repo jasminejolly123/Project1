@@ -13,6 +13,8 @@ namespace Project1
         //public Movement MoveAI { get; set; }
         public float Speed { get; set; }
         public Vector2 Position { get; set; }
+        public Around MoveAI { get; internal set; }
+
         protected readonly Texture2D Texture;
         protected readonly Vector2 origin;
 

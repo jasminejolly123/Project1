@@ -17,12 +17,12 @@ namespace Project1
             _path.Add(point);
         }
 
-        public override void Move(Sprite ghost )
+        public override void Move(Sprite ghost)
         {
             if (_path.Count < 1) return;
 
             var dir = _path[_current] - ghost.Position;
-
+            
             if (dir.Length() > 4)
             {
                 dir.Normalize();
