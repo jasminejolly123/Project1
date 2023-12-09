@@ -13,6 +13,7 @@ namespace Project1
     {
         private GraphicsDeviceManager _graphics;
         public GameManager _gameManager;
+        public Sprite _sprite;
         public SpriteBatch _spriteBatch;
         private Texture2D _pacman;
         public Vector2 _pacmanposition;
@@ -115,8 +116,8 @@ namespace Project1
             _walls.Add(new Rectangle(432, 224, 240, 40));
             _walls.Add(new Rectangle(648, 384, 60, 52));
 
-            
 
+            _sprite = new Sprite(Content.Load<Texture2D>("R"), new Vector2(0));
             _gameManager = new GameManager();
             
         }
@@ -174,35 +175,31 @@ namespace Project1
 
 
 
-                foreach (Rectangle rectangle in _walls)
-                {
-                    if (_pacmanposition.X < rectangle.Right && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
-                    {
-                        _pacmanposition.X = _pacmanposition.X + 5;
-                    }
+                //foreach (Rectangle rectangle in _walls)
+                //{
+                //    if (_pacmanposition.X < rectangle.Right && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
+                //    {
+                //        _pacmanposition.X = _pacmanposition.X + 5;
+                //    }
 
-                    if (_pacmanposition.X > rectangle.Left && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
-                    {
-                        _pacmanposition.X = _pacmanposition.X - 5;
-                    }
+                //    if (_pacmanposition.X > rectangle.Left && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
+                //    {
+                //        _pacmanposition.X = _pacmanposition.X - 5;
+                //    }
 
-                    if (_pacmanposition.Y == rectangle.Bottom && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
-                    {
-                        _pacmanposition.Y = _pacmanposition.Y - 5;
-                    }
+                //    if (_pacmanposition.Y == rectangle.Bottom && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
+                //    {
+                //        _pacmanposition.Y = _pacmanposition.Y - 5;
+                //    }
 
-                    if (_pacmanposition.Y == rectangle.Top && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
-                    {
-                        _pacmanposition.Y = _pacmanposition.Y + 5;
-                    }
-                }
+                //    if (_pacmanposition.Y == rectangle.Top && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
+                //    {
+                //        _pacmanposition.Y = _pacmanposition.Y + 5;
+                //    }
+                //}
                 base.Update(gameTime);
 
             _gameManager.Update();
-            
-
-            
-
 
         }
 
@@ -259,6 +256,8 @@ namespace Project1
             ////_spriteBatch.Draw(OrangeTexture, Orange, Color.White);
 
             _gameManager.Draw(_spriteBatch);
+            _sprite.Draw(_spriteBatch);
+            //_sprite.Draw(_pacman, _pacmanposition, null, Color.White, 0, 0, 1, SpriteEffects.None, 1);
 
             _spriteBatch.End();
 

@@ -11,7 +11,7 @@ namespace Project1
     public class GameManager 
     {
         private readonly Pacman _player;
-        private readonly List<Sprite> _ghosts = new();
+        private readonly List<Ghost> _ghosts = new();
 
         public GameManager()
         {
