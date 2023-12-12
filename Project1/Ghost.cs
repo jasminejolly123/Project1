@@ -23,5 +23,11 @@ namespace Project1
         {
             MoveAI.Move(this);
         }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Rectangle rect = new Rectangle((int)Position.X, (int)Position.Y, 30, 30);
+            spriteBatch.Draw(Texture, rect, Color.White);
+        }
     }
 }

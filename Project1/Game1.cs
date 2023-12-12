@@ -14,13 +14,15 @@ namespace Project1
         private GraphicsDeviceManager _graphics;
         public GameManager _gameManager;
         public Sprite _sprite;
+        public Ghost _ghost;
         public SpriteBatch _spriteBatch;
         private Texture2D _pacman;
         public Vector2 _pacmanposition;
         public Vector2 _blockposition;
         Texture2D coverUp;
         public Texture2D PacmanTexture, WallTexture, PinkTexture, RedTexture, BlueTexture, OrangeTexture;
-        public Rectangle Pacman, Red, Pink, Blue, Orange;
+        //public Rectangle Pacman, Red, Pink, Blue, Orange;
+        public Pacman _Pacman;
         private List<Rectangle> _walls;
         //private Rectangle Wall1;
         //private Rectangle Wall2;
@@ -84,11 +86,11 @@ namespace Project1
             OrangeTexture = Content.Load<Texture2D>("orange ghost");
             RedTexture = Content.Load<Texture2D>("red ghost");
             Speed = 2;
-            Pacman = new Rectangle(0, 0, 30, 30);
-            Pink = new Rectangle(760, 0, 30, 30);
-            Red = new Rectangle(760, 0, 30, 30);
-            Blue = new Rectangle(760, 0, 30, 30);
-            Orange = new Rectangle(760, 0, 30, 30);
+            //Pacman = new Rectangle(0, 0, 30, 30);
+            //Pink = new Rectangle(760, 0, 30, 30);
+            //Red = new Rectangle(760, 0, 30, 30);
+            //Blue = new Rectangle(760, 0, 30, 30);
+            //Orange = new Rectangle(760, 0, 30, 30);
             _walls = new List<Rectangle>();
 
             _walls.Add(new Rectangle(0, 80, 80, 40));
@@ -117,8 +119,9 @@ namespace Project1
             _walls.Add(new Rectangle(648, 384, 60, 52));
 
 
-            _sprite = new Sprite(Content.Load<Texture2D>("R"), new Vector2(0));
+            _ghost = new Ghost(Content.Load<Texture2D>("orange ghost"), new Vector2(0));
             _gameManager = new GameManager();
+            _Pacman = new Pacman(Content.Load<Texture2D>("R"), new Vector2(0));
             
         }
 
@@ -141,25 +144,6 @@ namespace Project1
             //if (ks.IsKeyDown(Keys.Up)) Acceleration.Y = -1;
             //else if (ks.IsKeyDown(Keys.Down)) Acceleration.Y = 1;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                _pacmanposition.Y = _pacmanposition.Y - 5;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                _pacmanposition.Y = _pacmanposition.Y + 5;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                _pacmanposition.X = _pacmanposition.X - 5;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                _pacmanposition.X = _pacmanposition.X + 5;
-            }
 
             Acceleration *= Speed;
 
@@ -200,16 +184,17 @@ namespace Project1
                 base.Update(gameTime);
 
             _gameManager.Update();
+            _Pacman.Update();
 
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            Globals.Update(gameTime);
             //// TODO: Add your drawing code here
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
+            //_spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
             //_spriteBatch.Draw(WallTexture, Wall1, Color.BlueViolet);
             //_spriteBatch.Draw(WallTexture, Wall2, Color.BlueViolet);
             //_spriteBatch.Draw(WallTexture, Wall3, Color.BlueViolet);
@@ -256,7 +241,8 @@ namespace Project1
             ////_spriteBatch.Draw(OrangeTexture, Orange, Color.White);
 
             _gameManager.Draw(_spriteBatch);
-            _sprite.Draw(_spriteBatch);
+            //_ghost.Draw(_spriteBatch);
+            //_Pacman.Draw(_spriteBatch);
             //_sprite.Draw(_pacman, _pacmanposition, null, Color.White, 0, 0, 1, SpriteEffects.None, 1);
 
             _spriteBatch.End();

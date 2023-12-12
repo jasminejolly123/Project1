@@ -30,11 +30,11 @@ namespace Project1
         //    MoveAI.Move(this);
         //}
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            Globals.spritebatch.Draw(Texture, Position, null, Color.White, 0, origin, 1, SpriteEffects.None, 1);
-            //Rectangle rect = new Rectangle((int)Position.X, (int)Position.Y, 30, 30);
-            //spriteBatch.Draw(Texture, rect, Color.White);
-        }
+        //public void Draw(SpriteBatch spriteBatch)
+        //{
+        //    Globals.spritebatch.Draw(Texture, Position, null, Color.White, 0, origin, 1, SpriteEffects.None, 1);
+        //    //Rectangle rect = new Rectangle((int)Position.X, (int)Position.Y, 30, 30);
+        //    //spriteBatch.Draw(Texture, rect, Color.White);
+        //}
     }
 }
