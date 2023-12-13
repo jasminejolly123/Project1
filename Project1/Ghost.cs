@@ -16,7 +16,7 @@ namespace Project1
 
         public Ghost(Texture2D tex, Vector2 pos) : base(tex, pos)
         {
-            Speed = 250;
+            Speed = 200;
         }
 
         public void Update()

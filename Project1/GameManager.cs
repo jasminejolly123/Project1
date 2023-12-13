@@ -32,7 +32,7 @@ namespace Project1
             //    MoveAI = ai
             //});
 
-            _ghosts.Add(new(ghosttexture1, new(750, 50))
+            _ghosts.Add(new(ghosttexture4, new(750, 50))
             {
                 MoveAI = new Follow
                 {
@@ -40,7 +40,15 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture2, new(650, 50))
+            _ghosts.Add(new(ghosttexture1, new(150, 350))
+            {
+                MoveAI = new Distance
+                {
+                    Target = _player
+                }
+            });
+
+            _ghosts.Add(new(ghosttexture2, new(550, 50))
             {
                 MoveAI = new Follow
                 {
@@ -48,15 +56,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture3, new(550, 50))
-            {
-                MoveAI = new Follow
-                {
-                    Target = _player
-                }
-            });
-
-            _ghosts.Add(new(ghosttexture4, new(450, 50))
+            _ghosts.Add(new(ghosttexture3, new(450, 50))
             {
                 MoveAI = new Follow
                 {
