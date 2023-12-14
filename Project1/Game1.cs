@@ -81,10 +81,10 @@ namespace Project1
 
             PacmanTexture = Content.Load<Texture2D>("R");
             WallTexture = Content.Load<Texture2D>("dirt");
-            PinkTexture = Content.Load<Texture2D>("pinkghost");
-            BlueTexture = Content.Load<Texture2D>("blue ghost");
-            OrangeTexture = Content.Load<Texture2D>("orange ghost");
-            RedTexture = Content.Load<Texture2D>("red ghost");
+            PinkTexture = Content.Load<Texture2D>("pink");
+            BlueTexture = Content.Load<Texture2D>("blue");
+            OrangeTexture = Content.Load<Texture2D>("orangeghost");
+            RedTexture = Content.Load<Texture2D>("redghost");
             Speed = 2;
             //Pacman = new Rectangle(0, 0, 30, 30);
             //Pink = new Rectangle(760, 0, 30, 30);
@@ -119,7 +119,7 @@ namespace Project1
             _walls.Add(new Rectangle(648, 384, 60, 52));
 
 
-            _ghost = new Ghost(Content.Load<Texture2D>("orange ghost"), new Vector2(0));
+            _ghost = new Ghost(Content.Load<Texture2D>("orangeghost"), new Vector2(0));
             _gameManager = new GameManager();
             _Pacman = new Pacman(Content.Load<Texture2D>("R"), new Vector2(0));
             

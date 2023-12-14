@@ -16,7 +16,7 @@ namespace Project1
             if (Target is null) return;
 
             Random rnd = new Random();
-            int pos = rnd.Next(0, 400);
+            //int pos = rnd.Next(0, 400);
 
             var dir = Target.Position - ghost.Position;
 

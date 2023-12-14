@@ -15,11 +15,11 @@ namespace Project1
 
         public GameManager()
         {
-            _player = new(Globals.content.Load<Texture2D>("R"), new(600, 600));
-            var ghosttexture1 = Globals.content.Load<Texture2D>("pinkghost");
-            var ghosttexture2 = Globals.content.Load<Texture2D>("orange ghost");
-            var ghosttexture3 = Globals.content.Load<Texture2D>("blue ghost");
-            var ghosttexture4 = Globals.content.Load<Texture2D>("red ghost");
+            _player = new(Globals.content.Load<Texture2D>("R"), new(0, 0));
+            var ghosttexture1 = Globals.content.Load<Texture2D>("pink");
+            var ghosttexture2 = Globals.content.Load<Texture2D>("orangeghost");
+            var ghosttexture3 = Globals.content.Load<Texture2D>("blue");
+            var ghosttexture4 = Globals.content.Load<Texture2D>("redghost");
 
             //var ai = new Around();
             //ai.AddPoint(new(100, 100));
@@ -40,7 +40,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture1, new(150, 350))
+            _ghosts.Add(new(ghosttexture1, new(750, 50))
             {
                 MoveAI = new Distance
                 {
@@ -48,7 +48,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture2, new(550, 50))
+            _ghosts.Add(new(ghosttexture2, new(750, 30))
             {
                 MoveAI = new Follow
                 {
@@ -56,7 +56,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture3, new(450, 50))
+            _ghosts.Add(new(ghosttexture3, new(750, 0))
             {
                 MoveAI = new Follow
                 {
