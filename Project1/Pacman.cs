@@ -68,22 +68,22 @@ namespace Project1
 
             foreach (Rectangle rectangle in _walls)
             {
-                if (Position.X < rectangle.Right && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
+                if (Position.X == rectangle.Right && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
                 {
                     Position = new Vector2(Position.X + 5, Position.Y);
                 }
 
-                if (Position.X > rectangle.Left && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
+                if (Position.X == rectangle.Left && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
                 {
                     Position = new Vector2(Position.X - 5, Position.Y);
                 }
 
-                if (Position.Y > rectangle.Bottom && Position.X < rectangle.Right && Position.X > rectangle.Left)
+                if (Position.Y == rectangle.Bottom && Position.X < rectangle.Right && Position.X > rectangle.Left)
                 {
                     Position = new Vector2(Position.X, Position.Y - 5);
                 }
 
-                if (Position.Y < rectangle.Top && Position.X < rectangle.Right && Position.X > rectangle.Left)
+                if (Position.Y == rectangle.Top && Position.X < rectangle.Right && Position.X > rectangle.Left)
                 {
                     Position = new Vector2(Position.X, Position.Y + 5);
                 }

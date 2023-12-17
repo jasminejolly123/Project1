@@ -21,16 +21,6 @@ namespace Project1
             var ghosttexture3 = Globals.content.Load<Texture2D>("blue");
             var ghosttexture4 = Globals.content.Load<Texture2D>("redghost");
 
-            //var ai = new Around();
-            //ai.AddPoint(new(100, 100));
-            //ai.AddPoint(new(400, 100));
-            //ai.AddPoint(new(400, 400));
-            //ai.AddPoint(new(100, 400));
-
-            //_ghosts.Add(new (ghosttexture, new(50, 50))
-            //{
-            //    MoveAI = ai
-            //});
 
             _ghosts.Add(new(ghosttexture4, new(750, 50))
             {
@@ -48,7 +38,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture2, new(750, 30))
+            _ghosts.Add(new(ghosttexture2, new(750, 50))
             {
                 MoveAI = new Follow
                 {
@@ -56,7 +46,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture3, new(750, 0))
+            _ghosts.Add(new(ghosttexture3, new(750, 50))
             {
                 MoveAI = new Follow
                 {
@@ -71,7 +61,7 @@ namespace Project1
             _player.Update();
             foreach (var ghost in _ghosts)
             {
-                ghost.Update();
+                ghost.Update(new Vector2 4(750, 50));
             }
         }
         public void Draw(SpriteBatch _spritebatch)
