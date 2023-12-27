@@ -11,6 +11,7 @@ namespace Project1
     {
         private readonly List<Vector2> _path = new();
         private int _current;
+        public Pacman Target { get; set; }
 
         public void AddPoint(Vector2 point)
         {
@@ -22,8 +23,9 @@ namespace Project1
             if (_path.Count < 1) return;
 
             var dir = _path[_current] - ghost.Position;
+            var dir2 = Target.Position - ghost.Position;
             
-            if (dir.Length() > 4)
+            if (dir.Length() > dir2.Length())
             {
                 dir.Normalize();
                 ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;

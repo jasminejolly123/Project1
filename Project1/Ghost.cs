@@ -20,7 +20,7 @@ namespace Project1
             Speed = 200;
         }
 
-        public void Update(Vector2 pos)
+        public void Update()
         {
             MoveAI.Move(this);
 
