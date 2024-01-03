@@ -72,7 +72,7 @@ namespace Project1
         }
         public void Draw(SpriteBatch _spritebatch)
         {
-            _player.Draw(_spritebatch );
+            _player.Draw(_spritebatch);
             foreach (var ghost in _ghosts)
             {
                 ghost.Draw(_spritebatch);
