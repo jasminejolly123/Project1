@@ -46,7 +46,7 @@ namespace Project1
 
             _ghosts.Add(new(ghosttexture2, new(750, 50))
             {
-                MoveAI = new Follow
+                MoveAI = new RandomMove
                 {
                     Target = _player
                 }

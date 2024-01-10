@@ -20,6 +20,8 @@ namespace Project1
 
         public void Update()
         {
+            Move(new Vector2(0, 0));
+
             Direction = InputManager.Direction;
 
             if (Direction != Vector2.Zero )
@@ -27,7 +29,7 @@ namespace Project1
                 Direction = Vector2.Normalize(Direction);
                 Position += Direction * Speed * Globals.TotalSeconds;
             }
-            Move(new Vector2(0, 0));
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -66,29 +68,59 @@ namespace Project1
 
             Walls();
 
+            //foreach (Rectangle rectangle in _walls)
+            //{
+            //    if (Position.X == rectangle.Right && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
+            //    {
+            //        Speed = 0;
+            //    }
+
+            //    if (Position.X == rectangle.Left && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
+            //    {
+            //        Speed = 0;
+            //    }
+
+            //    if (Position.Y == rectangle.Bottom && Position.X < rectangle.Right && Position.X > rectangle.Left)
+            //    {
+            //        Speed = 0;
+            //    }
+
+            //    if (Position.Y == rectangle.Top && Position.X < rectangle.Right && Position.X > rectangle.Left)
+            //    {
+            //        Speed = 0;
+            //    }
+            //}
             foreach (Rectangle rectangle in _walls)
+
             {
-                if (Position.X == rectangle.Right && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
+
+                if (rectangle.Contains(Position))
+
                 {
-                    Speed = 0;
+                    if (Keyboard.GetState().IsKeyDown(Keys.W))
+                    {
+                        Position = new Vector2(Position.Y + 1);
+                    }
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.S))
+                    {
+                        Position = new Vector2(Position.Y - 1);
+                    }
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.A))
+                    {
+                        Position = new Vector2(Position.Y + 1);
+                    }
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.D))
+                    {
+                        Position = new Vector2(Position.Y - 1);
+                    }
+
+
                 }
 
-                if (Position.X == rectangle.Left && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
-                {
-                    Speed = 0;
-                }
-
-                if (Position.Y == rectangle.Bottom && Position.X < rectangle.Right && Position.X > rectangle.Left)
-                {
-                    Speed = 0;
-                }
-
-                if (Position.Y == rectangle.Top && Position.X < rectangle.Right && Position.X > rectangle.Left)
-                {
-                    Speed = 0;
-                }
             }
-
 
         }
 
