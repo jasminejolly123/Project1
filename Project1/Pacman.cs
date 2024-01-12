@@ -13,23 +13,30 @@ namespace Project1
     {
         public Vector2 Direction { get; set; }
         private List<Rectangle> _walls;
-
+        
         public Pacman(Texture2D tex, Vector2 pos) : base(tex, pos)
         {
         }
 
         public void Update()
         {
-            Move(new Vector2(0, 0));
-
+            Walls();
+            Vector2 OldPosition = Position;
             Direction = InputManager.Direction;
 
-            if (Direction != Vector2.Zero )
+            if (Direction != Vector2.Zero)
             {
                 Direction = Vector2.Normalize(Direction);
                 Position += Direction * Speed * Globals.TotalSeconds;
             }
-            
+
+            foreach (Rectangle rectangle in _walls)
+            {
+                if (rectangle.Contains(Position))
+                {
+                    Position = OldPosition;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -38,91 +45,7 @@ namespace Project1
             spriteBatch.Draw(Texture, rect, Color.White);
         }
 
-        public void Move(Vector2 pos)
-        {
-            var keyboardState = Keyboard.GetState();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                pos.Y = pos.Y - 5;
-                Position = new Vector2(Position.X, Position.Y - 5);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                pos.Y = pos.Y + 5;
-                Position = new Vector2(Position.X, Position.Y + 5);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                pos.X = pos.X - 5;
-                Position = new Vector2(Position.X - 5, Position.Y);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                Position = new Vector2(Position.X + 5, Position.Y);
-                pos.X = pos.X + 5;
-            }
-
-            Walls();
-
-            //foreach (Rectangle rectangle in _walls)
-            //{
-            //    if (Position.X == rectangle.Right && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
-            //    {
-            //        Speed = 0;
-            //    }
-
-            //    if (Position.X == rectangle.Left && Position.Y > (rectangle.Top) && Position.Y < rectangle.Bottom)
-            //    {
-            //        Speed = 0;
-            //    }
-
-            //    if (Position.Y == rectangle.Bottom && Position.X < rectangle.Right && Position.X > rectangle.Left)
-            //    {
-            //        Speed = 0;
-            //    }
-
-            //    if (Position.Y == rectangle.Top && Position.X < rectangle.Right && Position.X > rectangle.Left)
-            //    {
-            //        Speed = 0;
-            //    }
-            //}
-            foreach (Rectangle rectangle in _walls)
-
-            {
-
-                if (rectangle.Contains(Position))
-
-                {
-                    if (Keyboard.GetState().IsKeyDown(Keys.W))
-                    {
-                        Position = new Vector2(Position.Y + 1);
-                    }
-
-                    if (Keyboard.GetState().IsKeyDown(Keys.S))
-                    {
-                        Position = new Vector2(Position.Y - 1);
-                    }
-
-                    if (Keyboard.GetState().IsKeyDown(Keys.A))
-                    {
-                        Position = new Vector2(Position.Y + 1);
-                    }
-
-                    if (Keyboard.GetState().IsKeyDown(Keys.D))
-                    {
-                        Position = new Vector2(Position.Y - 1);
-                    }
-
-
-                }
-
-            }
-
-        }
+        
 
         public void Walls()
         {
