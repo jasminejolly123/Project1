@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace Project1
 {
     public class Around : Movement
@@ -40,10 +41,17 @@ namespace Project1
             Walls();
             Vector2 OldPosition = ghost.Position;
 
-            System.Collections.IList list= _walls;
-            for (int i = 0; i < list.Count; i++)
+            //System.Collections.IList list = _walls;
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    Rectangle rectangle = (Rectangle)list[i];
+            //    if (rectangle.Contains(ghost.Position))
+            //    {
+            //        ghost.Position = OldPosition;
+            //    }
+            //}
+            foreach (Rectangle rectangle in _walls)
             {
-                Rectangle rectangle = (Rectangle)list[i];
                 if (rectangle.Contains(ghost.Position))
                 {
                     ghost.Position = OldPosition;

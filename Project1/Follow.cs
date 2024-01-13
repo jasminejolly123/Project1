@@ -28,10 +28,8 @@ namespace Project1
             Walls();
             Vector2 OldPosition = ghost.Position;
 
-            System.Collections.IList list = _walls;
-            for (int i = 0; i < list.Count; i++)
+            foreach (Rectangle rectangle in _walls)
             {
-                Rectangle rectangle = (Rectangle)list[i];
                 if (rectangle.Contains(ghost.Position))
                 {
                     ghost.Position = OldPosition;
