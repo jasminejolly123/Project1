@@ -47,6 +47,9 @@ namespace Project1
 
         {
 
+            Walls();
+            Vector2 OldPosition = ghost.Position;
+
             if (Target is null) return;
 
 
@@ -69,8 +72,6 @@ namespace Project1
 
             }
 
-            Walls();
-            Vector2 OldPosition = ghost.Position;
 
             foreach (Rectangle rectangle in _walls)
             {

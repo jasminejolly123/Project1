@@ -23,6 +23,9 @@ namespace Project1
 
         public override void Move(Sprite ghost)
         {
+            Walls();
+            Vector2 OldPosition = ghost.Position;
+
             if (_path.Count < 1) return;
 
             var dir = _path[_current] - ghost.Position;
@@ -38,8 +41,6 @@ namespace Project1
                 _current = (_current + 1) % _path.Count;
             }
 
-            Walls();
-            Vector2 OldPosition = ghost.Position;
 
             //System.Collections.IList list = _walls;
             //for (int i = 0; i < list.Count; i++)

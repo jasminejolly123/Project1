@@ -14,6 +14,9 @@ namespace Project1
 
         public override void Move(Sprite ghost)
         {
+            Walls();
+            Vector2 OldPosition = ghost.Position;
+
             if (Target == null) return;
 
             var dir = Target.Position - ghost.Position;
@@ -55,8 +58,6 @@ namespace Project1
                 ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
             }
 
-            Walls();
-            Vector2 OldPosition = ghost.Position;
 
             foreach (Rectangle rectangle in _walls)
             {
