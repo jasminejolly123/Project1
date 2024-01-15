@@ -1,28 +1,35 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 
 namespace Project1
 {
-    internal class Dijkstra
+    internal class Dijkstra : Movement
     {
         private List <Microsoft.Xna.Framework.Vector2> _nodes;
         private List<Rectangle> _walls;
 
+        public Pacman Target { get; set; }
+        var Start = new Microsoft.Xna.Framework.Vector2(760, 60);
+        var End = Target.Position;
+
         public void nodes()
         {
             _nodes = new List<Microsoft.Xna.Framework.Vector2>();
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 800; i+=20)
             {
-                for (int j = 0; j < 20; j++)
+                for (int j = 0; j < 400; j+=20)
                 {
                     foreach (Rectangle rectangle in _walls)
                     {
-                        if (rectangle.Contains(new Microsoft.Xna.Framework.Vector2( i, j))
+                        if (rectangle.Contains(new Microsoft.Xna.Framework.Vector2( i, j)))
                         {
                         }
                         else
@@ -61,6 +68,56 @@ namespace Project1
             _walls.Add(new Rectangle(432, 36, 120, 40));
             _walls.Add(new Rectangle(432, 224, 240, 40));
             _walls.Add(new Rectangle(648, 384, 60, 52));
+        }
+
+        public List<Microsoft.Xna.Framework.Vector2> GetShortestPathDijkstra()
+        {
+            DijkstraSearch();
+            var shortestPath = new List<Microsoft.Xna.Framework.Vector2>();
+            shortestPath.Add(End);
+            BuildShortestPath(shortestPath, End);
+            shortestPath.Reverse();
+            return shortestPath;
+        }
+
+
+
+        private void BuildShortestPath(List<Microsoft.Xna.Framework.Vector2> list, Microsoft.Xna.Framework.Vector2 node)
+        {
+            if (new Microsoft.Xna.Framework.Vector2(760, 60) == null)
+                return;
+            list.Add(new Microsoft.Xna.Framework.Vector2(760, 60));
+            BuildShortestPath(list, new Microsoft.Xna.Framework.Vector2(760, 60));
+        }
+
+        private void DijkstraSearch()
+        {
+            Start.MinCostToStart = 0;
+            var prioQueue = new List<var>();
+            prioQueue.Add(Start);
+            do
+            {
+                prioQueue = prioQueue.OrderBy(x => x.MinCostToStart).ToList();
+                var node = prioQueue.First();
+                prioQueue.Remove(node);
+                foreach (var cnn in node.Connections.OrderBy(x => x.Cost))
+                {
+                    var childNode = cnn.ConnectedNode;
+                    if (childNode.Visited)
+                        continue;
+                    if (childNode.MinCostToStart == null ||
+                        node.MinCostToStart + cnn.Cost < childNode.MinCostToStart)
+                    {
+                        childNode.MinCostToStart = node.MinCostToStart + cnn.Cost;
+                        childNode.NearestToStart = node;
+                        if (!prioQueue.Contains(childNode))
+                            prioQueue.Add(childNode);
+                    }
+                }
+                node.Visited = true;
+                if (node == End)
+                    return;
+            } while (prioQueue.Any());
         }
     }
 }
