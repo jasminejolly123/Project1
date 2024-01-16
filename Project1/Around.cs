@@ -15,30 +15,27 @@ namespace Project1
         private readonly List<Vector2> _path = new();
         private int _current;
         public Pacman Target { get; set; }
-
-        public void AddPoint(Vector2 point)
-        {
-            _path.Add(point);
-        }
+        public List<Microsoft.Xna.Framework.Vector2> _points;
 
         public override void Move(Sprite ghost)
         {
-            Walls();
+            Points();
             Vector2 OldPosition = ghost.Position;
 
-            if (_path.Count < 1) return;
+            if (Target is null) return;
 
-            var dir = _path[_current] - ghost.Position;
-            var dir2 = Target.Position - ghost.Position;
+            while (ghost.Position != Target.Position)
+            {
+                foreach (Vector2 point in _points)
+                {
+                    var dir = Target.Position - point;
 
-            if (dir.Length() > dir2.Length())
-            {
-                dir.Normalize();
-                ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-            }
-            else
-            {
-                _current = (_current + 1) % _path.Count;
+                    if (dir.Length() > 4)
+                    {
+                        dir.Normalize();
+                        ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
+                    }
+                }
             }
 
 
@@ -50,6 +47,23 @@ namespace Project1
                     ghost.Position = OldPosition;
                 }
             }
+        }
+
+        public void Points()
+        {
+            _points = new List<Microsoft.Xna.Framework.Vector2>();
+            _points.Add(new Microsoft.Xna.Framework.Vector2(658, 235));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(517, 235));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(517, 315));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(306, 315));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(306, 249));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(141, 249));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(141, 155));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(263, 155));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(263, 249));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(352, 249));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(352, 164));
+            _points.Add(new Microsoft.Xna.Framework.Vector2(658, 164));
         }
     }
 }

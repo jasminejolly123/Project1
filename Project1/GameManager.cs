@@ -21,12 +21,6 @@ namespace Project1
             var ghosttexture3 = Globals.content.Load<Texture2D>("blue");
             var ghosttexture4 = Globals.content.Load<Texture2D>("redghost");
 
-            var ai = new Around();
-            ai.AddPoint(new(100, 100));
-            ai.AddPoint(new(100, 300));
-            ai.AddPoint(new(700, 300));
-            ai.AddPoint(new(700, 100));
-
 
             _ghosts.Add(new(ghosttexture4, new(750, 50))
             {
@@ -56,7 +50,7 @@ namespace Project1
             {
                 MoveAI = new Around
                 {
-                    
+                    Target = _player
                 }
             });
 
