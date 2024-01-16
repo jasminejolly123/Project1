@@ -30,7 +30,7 @@ namespace Project1
 
             var dir = _path[_current] - ghost.Position;
             var dir2 = Target.Position - ghost.Position;
-            
+
             if (dir.Length() > dir2.Length())
             {
                 dir.Normalize();
@@ -42,15 +42,7 @@ namespace Project1
             }
 
 
-            //System.Collections.IList list = _walls;
-            //for (int i = 0; i < list.Count; i++)
-            //{
-            //    Rectangle rectangle = (Rectangle)list[i];
-            //    if (rectangle.Contains(ghost.Position))
-            //    {
-            //        ghost.Position = OldPosition;
-            //    }
-            //}
+            
             foreach (Rectangle rectangle in _walls)
             {
                 if (rectangle.Contains(ghost.Position))

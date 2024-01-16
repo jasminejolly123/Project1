@@ -11,113 +11,120 @@ using Microsoft.Xna.Framework;
 
 namespace Project1
 {
-    internal class Dijkstra : Movement
-    {
-        private List <Microsoft.Xna.Framework.Vector2> _nodes;
-        private List<Rectangle> _walls;
+    
 
-        public Pacman Target { get; set; }
-        var Start = new Microsoft.Xna.Framework.Vector2(760, 60);
-        var End = Target.Position;
-
-        public void nodes()
+        public class Dijkstra
         {
-            _nodes = new List<Microsoft.Xna.Framework.Vector2>();
-            for (int i = 0; i < 800; i+=20)
+            // A utility function to find the
+            // vertex with minimum distance
+            // value, from the set of vertices
+            // not yet included in shortest
+            // path tree
+            static int V = 9;
+            int minDistance(int[] dist,
+                            bool[] sptSet)
             {
-                for (int j = 0; j < 400; j+=20)
-                {
-                    foreach (Rectangle rectangle in _walls)
+                // Initialize min value
+                int min = int.MaxValue, min_index = -1;
+
+                for (int v = 0; v < V; v++)
+                    if (sptSet[v] == false && dist[v] <= min)
                     {
-                        if (rectangle.Contains(new Microsoft.Xna.Framework.Vector2( i, j)))
-                        {
-                        }
-                        else
-                        {
-                            _nodes.Add(new Microsoft.Xna.Framework.Vector2(i, j));
-                        }
-                    }   
-                } 
+                        min = dist[v];
+                        min_index = v;
+                    }
+
+                return min_index;
+            }
+
+            // A utility function to print
+            // the constructed distance array
+            void printSolution(int[] dist, int n)
+            {
+                Console.Write("Vertex     Distance "
+                              + "from Source\n");
+                for (int i = 0; i < V; i++)
+                    Console.Write(i + " \t\t " + dist[i] + "\n");
+            }
+
+            // Function that implements Dijkstra's
+            // single source shortest path algorithm
+            // for a graph represented using adjacency
+            // matrix representation
+            void dijkstra(int[,] graph, int src)
+            {
+                int[] dist = new int[V]; // The output array. dist[i]
+                                         // will hold the shortest
+                                         // distance from src to i
+
+                // sptSet[i] will true if vertex
+                // i is included in shortest path
+                // tree or shortest distance from
+                // src to i is finalized
+                bool[] sptSet = new bool[V];
+
+                // Initialize all distances as
+                // INFINITE and stpSet[] as false
+                for (int i = 0; i < V; i++)
+                {
+                    dist[i] = int.MaxValue;
+                    sptSet[i] = false;
+                }
+
+                // Distance of source vertex
+                // from itself is always 0
+                dist[src] = 0;
+
+                // Find shortest path for all vertices
+                for (int count = 0; count < V - 1; count++)
+                {
+                    // Pick the minimum distance vertex
+                    // from the set of vertices not yet
+                    // processed. u is always equal to
+                    // src in first iteration.
+                    int u = minDistance(dist, sptSet);
+
+                    // Mark the picked vertex as processed
+                    sptSet[u] = true;
+
+                    // Update dist value of the adjacent
+                    // vertices of the picked vertex.
+                    for (int v = 0; v < V; v++)
+
+                        // Update dist[v] only if is not in
+                        // sptSet, there is an edge from u
+                        // to v, and total weight of path
+                        // from src to v through u is smaller
+                        // than current value of dist[v]
+                        if (!sptSet[v] && graph[u, v] != 0 &&
+                             dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
+                            dist[v] = dist[u] + graph[u, v];
+                }
+
+                // print the constructed distance array
+                printSolution(dist, V);
+            }
+
+            // Driver Code
+            public static void Main()
+            {
+                /* Let us create the example 
+        graph discussed above */
+                
+                int[,] graph = new int[,] { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+                                      { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+                                      { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
+                                      { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
+                                      { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
+                                      { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
+                                      { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
+                                      { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+                                      { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+                GFG t = new GFG();
+                t.dijkstra(graph, 0);
             }
         }
 
-        public void Walls()
-        {
-            _walls = new List<Rectangle>();
-            _walls.Add(new Rectangle(0, 80, 80, 40));
-            _walls.Add(new Rectangle(0, 400, 80, 80));
-            _walls.Add(new Rectangle(164, 0, 40, 112));
-            _walls.Add(new Rectangle(164, 112, 144, 40));
-            _walls.Add(new Rectangle(352, 0, 40, 280));
-            _walls.Add(new Rectangle(598, 0, 40, 160));
-            _walls.Add(new Rectangle(486, 120, 112, 40));
-            _walls.Add(new Rectangle(176, 400, 20, 80));
-            _walls.Add(new Rectangle(196, 400, 80, 20));
-            _walls.Add(new Rectangle(256, 320, 20, 80));
-            _walls.Add(new Rectangle(276, 320, 60, 20));
-            _walls.Add(new Rectangle(296, 450, 80, 30));
-            //Wall13 = new Rectangle(296, 420, 40, 20);
-            _walls.Add(new Rectangle(416, 400, 40, 80));
-            _walls.Add(new Rectangle(456, 440, 136, 40));
-            _walls.Add(new Rectangle(552, 400, 40, 80));
-            _walls.Add(new Rectangle(477, 320, 64, 40));
-            _walls.Add(new Rectangle(656, 304, 144, 40));
-            _walls.Add(new Rectangle(760, 344, 40, 140));
-            _walls.Add(new Rectangle(88, 184, 40, 148));
-            _walls.Add(new Rectangle(192, 208, 96, 60));
-            _walls.Add(new Rectangle(432, 36, 120, 40));
-            _walls.Add(new Rectangle(432, 224, 240, 40));
-            _walls.Add(new Rectangle(648, 384, 60, 52));
-        }
-
-        public List<Microsoft.Xna.Framework.Vector2> GetShortestPathDijkstra()
-        {
-            DijkstraSearch();
-            var shortestPath = new List<Microsoft.Xna.Framework.Vector2>();
-            shortestPath.Add(End);
-            BuildShortestPath(shortestPath, End);
-            shortestPath.Reverse();
-            return shortestPath;
-        }
-
-
-
-        private void BuildShortestPath(List<Microsoft.Xna.Framework.Vector2> list, Microsoft.Xna.Framework.Vector2 node)
-        {
-            if (new Microsoft.Xna.Framework.Vector2(760, 60) == null)
-                return;
-            list.Add(new Microsoft.Xna.Framework.Vector2(760, 60));
-            BuildShortestPath(list, new Microsoft.Xna.Framework.Vector2(760, 60));
-        }
-
-        private void DijkstraSearch()
-        {
-            Start.MinCostToStart = 0;
-            var prioQueue = new List<var>();
-            prioQueue.Add(Start);
-            do
-            {
-                prioQueue = prioQueue.OrderBy(x => x.MinCostToStart).ToList();
-                var node = prioQueue.First();
-                prioQueue.Remove(node);
-                foreach (var cnn in node.Connections.OrderBy(x => x.Cost))
-                {
-                    var childNode = cnn.ConnectedNode;
-                    if (childNode.Visited)
-                        continue;
-                    if (childNode.MinCostToStart == null ||
-                        node.MinCostToStart + cnn.Cost < childNode.MinCostToStart)
-                    {
-                        childNode.MinCostToStart = node.MinCostToStart + cnn.Cost;
-                        childNode.NearestToStart = node;
-                        if (!prioQueue.Contains(childNode))
-                            prioQueue.Add(childNode);
-                    }
-                }
-                node.Visited = true;
-                if (node == End)
-                    return;
-            } while (prioQueue.Any());
-        }
+        // This code is contributed by ChitraNayal
     }
-}
+

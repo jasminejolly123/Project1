@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Xml.Linq;
 
 namespace Project1
 {
-    public abstract class Movement
+    public abstract class Movement : Dijkstra
     {
         public abstract void Move(Sprite ghost);
         public List<Microsoft.Xna.Framework.Rectangle> _walls;
@@ -41,5 +42,7 @@ namespace Project1
             _walls.Add(new Microsoft.Xna.Framework.Rectangle(432, 224, 240, 40));
             _walls.Add(new Microsoft.Xna.Framework.Rectangle(648, 384, 60, 52));
         }
+
+        
     }
 }
