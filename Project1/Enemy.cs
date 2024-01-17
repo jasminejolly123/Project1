@@ -54,13 +54,11 @@ namespace Project1
 
             Vector2 moveDir = playerPos - position;
             moveDir.Normalize();
-            //position += moveDir * speed * dt;
             distanceToPlayer = 0;
             int state = 0;
 
             if (state == 0)
             {
-                // Everything the enemy does during "idle"
                 if (distanceToPlayer < 600)
                 {
                     state = 1;
@@ -68,8 +66,7 @@ namespace Project1
             }
             else if (state == 1)
             {
-                // Everything the enemy does during "following"
-                position += moveDir * speed * dt; // move enemy towards player
+                position += moveDir * speed * dt;
             }
 
 
@@ -91,8 +88,6 @@ namespace Project1
             speed = 160;
             radius = 42;
             texture2D = Globals.content.Load<Texture2D>("pinkghost");
-
-            //state = 0;
         }
     }
 
@@ -103,8 +98,6 @@ namespace Project1
             speed = 160;
             radius = 42;
             texture2D = Globals.content.Load<Texture2D>("orange ghost");
-
-            //state = 0;
         }
 
     }
@@ -116,8 +109,6 @@ namespace Project1
             speed = 160;
             radius = 42;
             texture2D = Globals.content.Load<Texture2D>("blue ghost");
-
-            //state = 0;
         }
 
     }
@@ -129,8 +120,6 @@ namespace Project1
             speed = 160;
             radius = 42;
             texture2D = Globals.content.Load<Texture2D>("red ghost");
-
-            //state = 0;
         }
 
     }

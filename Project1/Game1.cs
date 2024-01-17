@@ -21,41 +21,11 @@ namespace Project1
         public Vector2 _blockposition;
         Texture2D coverUp;
         public Texture2D PacmanTexture, WallTexture, PinkTexture, RedTexture, BlueTexture, OrangeTexture;
-        //public Rectangle Pacman, Red, Pink, Blue, Orange;
         public Pacman _Pacman;
         private List<Rectangle> _walls;
-        //private Rectangle Wall1;
-        //private Rectangle Wall2;
-        //private Rectangle Wall3;
-        //private Rectangle Wall4;
-        //private Rectangle Wall5;
-        //private Rectangle Wall6;
-        //private Rectangle Wall7;
-        //private Rectangle Wall8;
-        //private Rectangle Wall9;
-        //private Rectangle Wall10;
-        //private Rectangle Wall11;
-        //private Rectangle Wall12;
-        //private Rectangle Wall13;
-        //private Rectangle Wall14;
-        //private Rectangle Wall15;
-        //private Rectangle Wall16;
-        //private Rectangle Wall17;
-        //private Rectangle Wall18;
-        //private Rectangle Wall19;
-        //private Rectangle Wall20;
-        //private Rectangle Wall21;
-        //private Rectangle Wall22;
-        //private Rectangle Wall23;
-        //private Rectangle Wall24;
         public Vector2 Position, Direction, Acceleration;
         public float Speed;
         private readonly List<Sprite> _ghosts = new();
-        //public Texture2D ghosttexture;
-
-
-
-        //private ShapeBatcher _shapeBatcher;
 
         public Game1()
         {
@@ -64,12 +34,7 @@ namespace Project1
             IsMouseVisible = true;
         }
 
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
-        }
+        
 
         protected override void LoadContent()
         {
@@ -86,11 +51,6 @@ namespace Project1
             OrangeTexture = Content.Load<Texture2D>("orangeghost");
             RedTexture = Content.Load<Texture2D>("redghost");
             Speed = 2;
-            //Pacman = new Rectangle(0, 0, 30, 30);
-            //Pink = new Rectangle(760, 0, 30, 30);
-            //Red = new Rectangle(760, 0, 30, 30);
-            //Blue = new Rectangle(760, 0, 30, 30);
-            //Orange = new Rectangle(760, 0, 30, 30);
             _walls = new List<Rectangle>();
 
             _walls.Add(new Rectangle(0, 80, 80, 40));
@@ -136,51 +96,18 @@ namespace Project1
             var ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Escape)) Exit();
 
-            //Get the Direction Vector from the keyboard
 
             Acceleration = Vector2.Zero;
-            //if (ks.IsKeyDown(Keys.Left)) Acceleration.X = -1;
-            //else if (ks.IsKeyDown(Keys.Right)) Acceleration.X = 1;
-            //if (ks.IsKeyDown(Keys.Up)) Acceleration.Y = -1;
-            //else if (ks.IsKeyDown(Keys.Down)) Acceleration.Y = 1;
 
 
             Acceleration *= Speed;
 
-            Acceleration = Acceleration - Direction * 0.54f;//Velocity = Acceleration - Friction
+            Acceleration = Acceleration - Direction * 0.54f;
 
             Direction += Acceleration;
 
             Position += Direction;
 
-            //if (Wall.Intersects(Pacman))
-            
-                //Intersection is true. Now add the bouncing logic
-
-
-
-                //foreach (Rectangle rectangle in _walls)
-                //{
-                //    if (_pacmanposition.X < rectangle.Right && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
-                //    {
-                //        _pacmanposition.X = _pacmanposition.X + 5;
-                //    }
-
-                //    if (_pacmanposition.X > rectangle.Left && _pacmanposition.Y > (rectangle.Top) && _pacmanposition.Y < rectangle.Bottom)
-                //    {
-                //        _pacmanposition.X = _pacmanposition.X - 5;
-                //    }
-
-                //    if (_pacmanposition.Y == rectangle.Bottom && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
-                //    {
-                //        _pacmanposition.Y = _pacmanposition.Y - 5;
-                //    }
-
-                //    if (_pacmanposition.Y == rectangle.Top && _pacmanposition.X < rectangle.Right && _pacmanposition.X > -5)
-                //    {
-                //        _pacmanposition.Y = _pacmanposition.Y + 5;
-                //    }
-                //}
                 base.Update(gameTime);
 
             _gameManager.Update();
@@ -192,62 +119,16 @@ namespace Project1
         {
             GraphicsDevice.Clear(Color.Black);
             Globals.Update(gameTime);
-            //// TODO: Add your drawing code here
             _spriteBatch.Begin();
-            //_spriteBatch.Draw(_pacman, _pacmanposition, Color.White);
-            //_spriteBatch.Draw(WallTexture, Wall1, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall2, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall3, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall4, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall5, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall6, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall7, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall8, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall9, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall10, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall11, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall12, Color.BlueViolet);
-            ////_spriteBatch.Draw(WallTexture, Wall13, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall14, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall15, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall16, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall17, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall18, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall19, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall20, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall21, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall22, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall23, Color.BlueViolet);
-            //_spriteBatch.Draw(WallTexture, Wall24, Color.BlueViolet);
-            //_spriteBatch.Draw(PacmanTexture, Pacman, Color.White);
+           
 
             foreach (Rectangle wall in _walls)
             {
                 _spriteBatch.Draw(WallTexture, wall, Color.BlueViolet);
             }
-            //foreach (var ghost in _ghosts)
-            //{
-            //    _spriteBatch.Draw(ghosttexture, ghost, Color.White);
-            //}
-
-            //foreach (var ghost in _ghosts)
-            //{
-            //    ghost.Draw(_spriteBatch);
-            //}
-
-            ////_spriteBatch.Draw(PinkTexture, Pink, Color.White);
-            ////_spriteBatch.Draw(RedTexture, Red, Color.White);
-            ////_spriteBatch.Draw(BlueTexture, Blue, Color.White);
-            ////_spriteBatch.Draw(OrangeTexture, Orange, Color.White);
 
             _gameManager.Draw(_spriteBatch);
-            //_ghost.Draw(_spriteBatch);
-            //_Pacman.Draw(_spriteBatch);
-            //_sprite.Draw(_pacman, _pacmanposition, null, Color.White, 0, 0, 1, SpriteEffects.None, 1);
-
             _spriteBatch.End();
-
-            //_shapeBatcher.DrawRectangle(50, 30, Color.White);
             base.Draw(gameTime);
         }
     }
