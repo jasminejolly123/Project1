@@ -13,7 +13,7 @@ namespace Project1
     {
         public Vector2 Direction { get; set; }
         private List<Rectangle> _walls;
-        
+
         public Pacman(Texture2D tex, Vector2 pos) : base(tex, pos)
         {
         }
@@ -45,7 +45,7 @@ namespace Project1
             spriteBatch.Draw(Texture, rect, Color.White);
         }
 
-        
+
 
         public void Walls()
         {
@@ -78,3 +78,4 @@ namespace Project1
 
     }
 }
+

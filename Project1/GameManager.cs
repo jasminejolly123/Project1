@@ -8,7 +8,7 @@ using static System.Formats.Asn1.AsnWriter;
 using Microsoft.Xna.Framework.Content;
 namespace Project1
 {
-    public class GameManager 
+    public class GameManager
     {
         private readonly Pacman _player;
         private readonly List<Ghost> _ghosts = new();
@@ -21,6 +21,12 @@ namespace Project1
             var ghosttexture3 = Globals.content.Load<Texture2D>("blue");
             var ghosttexture4 = Globals.content.Load<Texture2D>("redghost");
 
+
+            var ai = new Around();
+            ai.AddPoint(new(100, 100));
+            ai.AddPoint(new(100, 300));
+            ai.AddPoint(new(700, 300));
+            ai.AddPoint(new(700, 100));
 
             _ghosts.Add(new(ghosttexture4, new(750, 50))
             {
@@ -74,3 +80,5 @@ namespace Project1
         }
     }
 }
+
+

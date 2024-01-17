@@ -34,7 +34,10 @@ namespace Project1
             IsMouseVisible = true;
         }
 
-        
+        protected override void Initialize()
+        {
+            base.Initialize();
+        }
 
         protected override void LoadContent()
         {
@@ -82,7 +85,7 @@ namespace Project1
             _ghost = new Ghost(Content.Load<Texture2D>("orangeghost"), new Vector2(0));
             _gameManager = new GameManager();
             _Pacman = new Pacman(Content.Load<Texture2D>("R"), new Vector2(0));
-            
+
         }
 
 
@@ -108,7 +111,7 @@ namespace Project1
 
             Position += Direction;
 
-                base.Update(gameTime);
+            base.Update(gameTime);
 
             _gameManager.Update();
             _Pacman.Update();
@@ -120,7 +123,7 @@ namespace Project1
             GraphicsDevice.Clear(Color.Black);
             Globals.Update(gameTime);
             _spriteBatch.Begin();
-           
+
 
             foreach (Rectangle wall in _walls)
             {
@@ -133,3 +136,4 @@ namespace Project1
         }
     }
 }
+

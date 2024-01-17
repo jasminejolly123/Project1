@@ -17,29 +17,36 @@ namespace Project1
         public Pacman Target { get; set; }
         public List<Microsoft.Xna.Framework.Vector2> _points;
 
+        public void AddPoint(Vector2 point)
+        {
+            _path.Add(point);
+        }
+
         public override void Move(Sprite ghost)
         {
             Points();
+            Walls();
+
             Vector2 OldPosition = ghost.Position;
 
             if (Target is null) return;
 
-            while (ghost.Position != Target.Position)
-            {
-                foreach (Vector2 point in _points)
-                {
-                    var dir = Target.Position - point;
+            //while (ghost.Position != Target.Position)
+            //{
+            //    foreach (Vector2 point in _points)
+            //    {
+            //        var dir = Target.Position - point;
 
-                    if (dir.Length() > 4)
-                    {
-                        dir.Normalize();
-                        ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-                    }
-                }
-            }
+            //        if (dir.Length() > 4)
+            //        {
+            //            dir.Normalize();
+            //            ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
+            //        }
+            //    }
+            //}
 
 
-            
+
             foreach (Rectangle rectangle in _walls)
             {
                 if (rectangle.Contains(ghost.Position))
@@ -67,3 +74,4 @@ namespace Project1
         }
     }
 }
+
