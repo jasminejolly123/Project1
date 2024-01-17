@@ -786,3 +786,8 @@ My Pac-Man games is incredibly exciting and entertaining with a map made from sc
 
 The walls in the map are a nice violet which constrasts the bright neon colours of the ghosts and the yellow of Pac-Man.
 
+
+
+
+
+My code has stopped running on my computer today, i don't know if this is just my computer or I've accidently changed my code without realising. I've gone through previous commits and none of them are currently running. My computers been having a lot of problems recently so i hope it's just me but if its not let me know.
