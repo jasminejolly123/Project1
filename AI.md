@@ -1,6 +1,6 @@
 ##Artificial Intelligence for Games
 ###My Code
-'''cs
+```cs
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -29,4 +29,4 @@ namespace Project1
         }
     }
 }
-'''
+```
