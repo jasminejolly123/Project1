@@ -12,28 +12,7 @@ namespace Project1
 {
     internal class RandomMove : Movement
     {
-        //public Pacman Target { get; set; }
-
-        //public override void Move(Sprite ghost)
-        //{
-        //    if (Target is null) return;
-
-        //    Random rnd = new Random();
-        //    int posy = rnd.Next(0, 400);
-        //    int posx = rnd.Next(0, 800);
-
-        //    Vector2 pos = new Vector2(posx, posy);
-
-        //    var dir = pos - ghost.Position;
-
-        //    dir.Normalize();
-        //    ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-
-        //    if (pos == ghost.Position)
-        //    {
-        //        Move(ghost);
-        //    }
-        //}
+       
 
         public Pacman Target { get; set; }
 
@@ -50,26 +29,38 @@ namespace Project1
             Walls();
             Vector2 OldPosition = ghost.Position;
 
+            Main();
+
             if (Target is null) return;
 
 
 
-            int pos = rng.Next(0, 400);
+            int num = rng.Next(0, 400);
+            int num2 = rng.Next(0, 800);
+            Vector2 pos = new Vector2(num2, num);
+
+            float dis1 = (ghost.Position.X - Target.Position.X) * (ghost.Position.X - Target.Position.X);
+            float dis2 = (ghost.Position.Y - Target.Position.Y) * (ghost.Position.Y - Target.Position.Y);
+            float dis3 = dis1 + dis2;
+            float dis4 = (float)Math.Sqrt(dis3);
+
+            float dis5 = (ghost.Position.X - pos.X) * (ghost.Position.X - pos.X);
+            float dis6 = (ghost.Position.Y - pos.Y) * (ghost.Position.Y - pos.Y);
+            float dis7 = dis5 + dis6;
+            float dis8 = (float)Math.Sqrt(dis7);
+            var dir1 = Target.Position - ghost.Position;
+            var dir2 = pos - ghost.Position;
 
 
-
-            var dir = Target.Position - ghost.Position;
-
-
-
-            if (dir.Length() > 4)
-
+            if (dir1.Length() > 4 && dis8 > dis4)
             {
-
-                dir.Normalize();
-
-                ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-
+                dir1.Normalize();
+                ghost.Position += dir1 * ghost.Speed * Globals.TotalSeconds;
+            }
+            else if (dir2.Length() > 4 && dis4> dis8)
+            {
+                dir2.Normalize();
+                ghost.Position += dir1 * ghost.Speed * Globals.TotalSeconds;
             }
 
 

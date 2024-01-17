@@ -18,6 +18,8 @@ namespace Project1
             Walls();
             Vector2 OldPosition = ghost.Position;
 
+            Main();
+
             if (Target is null) return;
 
             var dir = Target.Position - ghost.Position;
