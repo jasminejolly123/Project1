@@ -23,10 +23,6 @@ namespace Project1
 
             Main();
 
-            //int num = rng.Next(0, 400);
-            //int num2 = rng.Next(0, 800);
-            //Vector2 pos = new Vector2(num2, num);
-
             //float dis1 = (ghost.Position.X - Target.Position.X) * (ghost.Position.X - Target.Position.X);
             //float dis2 = (ghost.Position.Y - Target.Position.Y) * (ghost.Position.Y - Target.Position.Y);
             //float dis3 = dis1 + dis2;
@@ -39,9 +35,6 @@ namespace Project1
             //var dir1 = Target.Position - ghost.Position;
             //var dir2 = pos - ghost.Position;
 
-
-
-
             //if (dir1.Length() > 4 && dis8 < dis4)
             //{
             //    dir1.Normalize();
@@ -53,28 +46,32 @@ namespace Project1
             //    ghost.Position += dir1 * ghost.Speed * Globals.TotalSeconds;
             //}
 
-            int pos = rng.Next(0, 400);
+            //int pos = rng.Next(0, 400);
 
-            var dir = Target.Position - ghost.Position;
+            Vector2 pos = new Vector2(0, 0);
 
-            if (dir.Length() > 4)
-
+            while (pos != ghost.Position)
             {
 
-                dir.Normalize();
+                int num = rng.Next(0, 400);
+                int num2 = rng.Next(0, 800);
+                pos = new Vector2(num2, num);
+                var dir = pos - ghost.Position;
 
-                ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-
-            }
-
-            foreach (Rectangle rectangle in _walls)
-            {
-                if (rectangle.Contains(ghost.Position))
+                if (dir.Length() > 4)
                 {
-                    ghost.Position = OldPosition;
+                    dir.Normalize();
+                    ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
+                }
+
+                foreach (Rectangle rectangle in _walls)
+                {
+                    if (rectangle.Contains(ghost.Position))
+                    {
+                        ghost.Position = OldPosition;
+                    }
                 }
             }
-
         }
     }
 }
