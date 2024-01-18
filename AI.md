@@ -582,7 +582,7 @@ namespace Project1
     }
 }
 ```
-This takes the blue ghost around the map through set points
+This takes the blue ghost around the map through set points. When running this code on my laptop, with the while loop included the code does not run so in my code i've left it commented out so the code can run. I don't know if this is a problem with my laptop or my code but either way I can't manage to fix it.
 #### Distance
 ```cs
 namespace Project1
@@ -785,9 +785,3 @@ I believe my code is very reusable. Each part of my coded is seperated appropria
 My Pac-Man games is incredibly exciting and entertaining with a map made from scratch. Ghosts are the original colours and mostly follow the original steering behaviours. Around the map there are some areas easier to manuever around and areas they ay be harder keeping the user on their toes.
 
 The walls in the map are a nice violet which constrasts the bright neon colours of the ghosts and the yellow of Pac-Man.
-
-
-
-
-
-My code has stopped running on my computer today, i don't know if this is just my computer or I've accidently changed my code without realising. I've gone through previous commits and none of them are currently running. My computers been having a lot of problems recently so i hope it's just me but if its not let me know.
