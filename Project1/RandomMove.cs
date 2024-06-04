@@ -16,6 +16,9 @@ namespace Project1
         public Pacman Target { get; set; }
         private System.Random rng = new System.Random();
         private Orange currentState = Orange.RandomMove;
+        public SpriteBatch _spriteBatch;
+        public Texture2D _texture;
+        private Rectangle endScreen;
 
         public enum Orange
         {
@@ -89,7 +92,8 @@ namespace Project1
 
         public void UpdateStill()
         {
-            return;
+            endScreen = new Rectangle(164, 112, 144, 40);
+            _spriteBatch.Draw(_texture, endScreen, Color.Gray);
         }
 
     }
