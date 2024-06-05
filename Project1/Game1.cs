@@ -45,7 +45,7 @@ namespace Project1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _pacman = Content.Load<Texture2D>("R");
-            _pacmanposition = Vector2.Zero;
+            _pacmanposition = new Vector2(0,0);
 
             PacmanTexture = Content.Load<Texture2D>("R");
             WallTexture = Content.Load<Texture2D>("dirt");
@@ -82,7 +82,7 @@ namespace Project1
             _walls.Add(new Rectangle(648, 384, 60, 52));
 
 
-            _ghost = new Ghost(Content.Load<Texture2D>("orangeghost"), new Vector2(0));
+           // _ghost = new Ghost(Content.Load<Texture2D>("orangeghost"), new Vector2(0));
             _gameManager = new GameManager();
             _Pacman = new Pacman(Content.Load<Texture2D>("R"), new Vector2(0));
 

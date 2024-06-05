@@ -36,7 +36,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture1, new(750, 50))
+            _ghosts.Add(new(ghosttexture1, new(750, 40))
             {
                 MoveAI = new Distance
                 {
@@ -44,7 +44,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture2, new(750, 50))
+            _ghosts.Add(new(ghosttexture2, new(735, 40))
             {
                 MoveAI = new RandomMove
                 {
@@ -52,7 +52,7 @@ namespace Project1
                 }
             });
 
-            _ghosts.Add(new(ghosttexture3, new(750, 50))
+            _ghosts.Add(new(ghosttexture3, new(750, 60))
             {
                 MoveAI = new Around
                 {
