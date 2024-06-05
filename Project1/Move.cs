@@ -14,8 +14,8 @@ namespace Project1
     {
         public abstract void Move(Sprite ghost);
         public List<Microsoft.Xna.Framework.Rectangle> _walls;
-public void Walls()
-{
+    public void Walls()
+    {
     _walls = new List<Microsoft.Xna.Framework.Rectangle>();
     _walls.Add(new Microsoft.Xna.Framework.Rectangle(0, 80, 80, 40));
     _walls.Add(new Microsoft.Xna.Framework.Rectangle(0, 400, 80, 80));
@@ -41,7 +41,7 @@ public void Walls()
     _walls.Add(new Microsoft.Xna.Framework.Rectangle(432, 36, 120, 40));
     _walls.Add(new Microsoft.Xna.Framework.Rectangle(432, 224, 240, 40));
     _walls.Add(new Microsoft.Xna.Framework.Rectangle(648, 384, 60, 52));
-}
+    }
 
 
     }
