@@ -691,76 +691,85 @@ namespace Project1
 This steering behaviour is for the red ghost and takes Pac-Man's current position and follows that location
 #### Random Move
 ```cs
-namespace Project1
-{
-    internal class RandomMove : Movement
+internal class RandomMove : Movement
     {
         public Pacman Target { get; set; }
         private System.Random rng = new System.Random();
+        private Orange currentState = Orange.RandomMove;
+        public SpriteBatch _spriteBatch;
+        public Texture2D _texture;
+        private Rectangle endScreen;
+
+        public enum Orange
+        {
+            Still,
+            Chase,
+            RandomMove
+        }
+
         public override void Move(Sprite ghost)
         {
-            Walls();
-            Vector2 OldPosition = ghost.Position;
-            
-            if (Target is null) return;
-
-            Main();
-
-            //float dis1 = (ghost.Position.X - Target.Position.X) * (ghost.Position.X - Target.Position.X);
-            //float dis2 = (ghost.Position.Y - Target.Position.Y) * (ghost.Position.Y - Target.Position.Y);
-            //float dis3 = dis1 + dis2;
-            //float dis4 = (float)Math.Sqrt(dis3);
-
-            //float dis5 = (ghost.Position.X - pos.X) * (ghost.Position.X - pos.X);
-            //float dis6 = (ghost.Position.Y - pos.Y) * (ghost.Position.Y - pos.Y);
-            //float dis7 = dis5 + dis6;
-            //float dis8 = (float)Math.Sqrt(dis7);
-            //var dir1 = Target.Position - ghost.Position;
-            //var dir2 = pos - ghost.Position;
-
-            //if (dir1.Length() > 4 && dis8 < dis4)
-            //{
-            //    dir1.Normalize();
-            //    ghost.Position += dir2 * ghost.Speed * Globals.TotalSeconds;
-            //}
-            //else
-            //{
-            //    dir2.Normalize();
-            //    ghost.Position += dir1 * ghost.Speed * Globals.TotalSeconds;
-            //}
-
-            //int pos = rng.Next(0, 400);
-
-            Vector2 pos = new Vector2(0, 0);
-
-            while (pos != ghost.Position)
+            switch (currentState)
             {
-
-                int num = rng.Next(0, 400);
-                int num2 = rng.Next(0, 800);
-                pos = new Vector2(num2, num);
-                var dir = pos - ghost.Position;
-
-                if (dir.Length() > 4)
-                {
-                    dir.Normalize();
-                    ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-                }
-
-                foreach (Rectangle rectangle in _walls)
-                {
-                    if (rectangle.Contains(ghost.Position))
-                    {
-                        ghost.Position = OldPosition;
-                    }
-                }
+                case Orange.Chase:
+                    UpdateChase(ghost);
+                    break;
+                case Orange.RandomMove:
+                    UpdateRandomMove(ghost);
+                    break;
+                default:
+                    break;
             }
         }
+
+        private void UpdateRandomMove(Sprite ghost)
+        {
+            Vector2 OldPosition = ghost.Position;
+            Walls();
+
+            float time = 5.0f;
+
+            if (Globals.TotalSeconds > time)
+            {
+                int numX = rng.Next(0, 800);
+                int numY = rng.Next(0, 400);
+                ghost.Position = new Vector2(numX, numY);
+                time = time + 5;
+            }
+
+            foreach (Rectangle rectangle in _walls)
+            {
+                if (rectangle.Contains(ghost.Position))
+                {
+                    ghost.Position = OldPosition;
+                    return;
+                }
+            }
+
+            var dir = Target.Position - ghost.Position;
+            if (dir.Length() < 100)
+            {
+                currentState = Orange.Chase;
+            }
+        }
+
+        private void UpdateChase(Sprite ghost)
+        {
+            var dir = Target.Position - ghost.Position;
+            dir.Normalize();
+            ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
+
+            if (dir.Length() < 100)
+            {
+                currentState = Orange.RandomMove;
+
+            }
+
+        }
     }
-}
 
 ```
-This behaviour is for the orange ghost and follows a random location on the map and when it is reach follows a different point.
+This behaviour is for the orange ghost, it follows random coordinates on the map until it is in proximity with Pac-Man then it goes to chasing Pac-Man
 ### Steering
 Each of the ghosts have a unique AI steering behaviour. The red ghost has the most predictable behavior as it uses Pac-Mans position and follows it, the pink ghost predetermines where Pac-Man is going to be and goes to that location. I did this by taking the input of the user to see what direction the user is moving in and adjust the target position accordingly. The orange ghost takes a random position on the map and follows it, I tried to make it so when the orange close is closer to Pac-Man than the random position the orange ghost follow Pac-Man instead but this resulted in the orange ghost not spawning in so i commented that code out. The blue ghost flows a preset path around the map and stops if it comes into contact with Pac-Man.
 
