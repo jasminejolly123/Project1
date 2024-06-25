@@ -31,9 +31,6 @@ namespace Project1
         {
             switch (currentState)
             {
-                case Orange.Still:
-                    UpdateStill();
-                    break;
                 case Orange.Chase:
                     UpdateChase(ghost);
                     break;
@@ -49,12 +46,6 @@ namespace Project1
         {
             Vector2 OldPosition = ghost.Position;
             Walls();
-
-            if (Target.Position == ghost.Position)
-            {
-                currentState = Orange.Still;
-                return;
-            }
 
             float time = 5.0f;
 
@@ -87,12 +78,13 @@ namespace Project1
             var dir = Target.Position - ghost.Position;
             dir.Normalize();
             ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-        }
 
-        private void UpdateStill()
-        {
-            endScreen = new Rectangle(164, 112, 144, 40);
-            _spriteBatch.Draw(_texture, endScreen, Color.Gray);
+            if (dir.Length() < 100)
+            {
+                currentState = Orange.RandomMove;
+
+            }
+
         }
     }
 }
