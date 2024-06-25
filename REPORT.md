@@ -775,8 +775,8 @@ My Dijkstras class does not work, I tried different approaches but I didn't leav
 
 If I had more time i would put more effort into figuring out the pathfinding algorithm and making more features in the game to make it more attractive.
 
-### Goal Oriented Action Planning
-It may be possible to say that goal oriented action planning is used in my game. The orange ghost makes a decision based on its position and the random position its following and Pac-Mans position and moves accordingly. If I had two seperate ghosts using the same behaviour they'd follow either the random position or Pac-Man indepently as the randm positions would be different giving the ghosts different positions which would make them make different decisions.
+### State Machine
+The orange ghost is supposed randomly moves around the map but when it comes in proximity with Pac-Man it switches to following Pac-Man. To do this I used a state machine with the different states being chase and random movement. The ghost starts with random movement and switches to chase when appropriate. Sadly the random movement does not work correctly but the chase does work and when the ghost is in proximity to Pac-Man the state machine successfully switches to the correct state and when the ghost get far enough away the state machine switches back to moving randomly.
 
 ### Reusable Code
 I believe my code is very reusable. Each part of my coded is seperated appropriately and most of my variables have good naming conventions making it easy to read. I reused my follow class for each of the different steering behaviours and was able to modify them easily.
