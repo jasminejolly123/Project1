@@ -316,79 +316,80 @@ namespace Project1
 Movement inherits from Dijkstra so each steering behaviour can use dijkstra to get around the walls and a list of Walls is included so ghosts can be stopped from passing through them
 #### Dijkstra
 ```cs
-namespace Project1
+public class Dijkstra
 {
-    
+    static int num = 9;
 
-        public class Dijkstra
+    int minDistance(int[] dist, bool[] sptSet)
+    {
+        int min = int.MaxValue, min_index = -1;
+
+        for (int i = 0; i < num; i++)
+            if (sptSet[i] == false && dist[i] <= min)
+            {
+                min = dist[i];
+                min_index = i;
+            }
+
+        return min_index;
+    }
+
+    void printSolution(int[] dist)
+    {
+        Console.Write("Vertex     Distance from Source\n");
+        for (int i = 0; i < num; i++)
+            Console.Write(i + " \t\t " + dist[i] + "\n");
+    }
+
+    public void dijkstra(int[,] graph, int src)
+    {
+        int[] dist = new int[num];
+        bool[] sptSet = new bool[num];
+
+        for (int i = 0; i < num; i++)
         {
-            static int num = 9;
-            int minDistance(int[] dist,
-                            bool[] sptSet)
+            dist[i] = int.MaxValue;
+            sptSet[i] = false;
+        }
+
+        dist[src] = 0;
+
+        for (int count = 0; count < num - 1; count++)
+        {
+            int u = minDistance(dist, sptSet);
+            sptSet[u] = true;
+
+            for (int v = 0; v < num; v++)
             {
-                int min = int.MaxValue, min_index = -1;
-
-                for (int i = 0; i < num; i++)
-                    if (sptSet[i] == false && dist[i] <= min)
-                    {
-                        min = dist[i];
-                        min_index = i;
-                    }
-
-                return min_index;
-            }
-
-            void printSolution(int[] dist, int n)
-            {
-                Console.Write("Vertex     Distance "
-                              + "from Source\n");
-                for (int i = 0; i < num; i++)
-                    Console.Write(i + " \t\t " + dist[i] + "\n");
-            }
-            void dijkstra(int[,] graph, int src)
-            {
-                int[] dist = new int[num]; 
-                bool[] sptSet = new bool[num];
-
-                for (int i = 0; i < num; i++)
+                if (!sptSet[v] && graph[u, v] != 0 &&
+                    dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
                 {
-                    dist[i] = int.MaxValue;
-                    sptSet[i] = false;
+                    dist[v] = dist[u] + graph[u, v];
                 }
-
-                dist[src] = 0;
-
-                for (int count = 0; count < num - 1; count++)
-                {
-                    int u = minDistance(dist, sptSet);
-                    sptSet[u] = true;
-                    for (int v = 0; v < num; v++)
-                    {
-                        if (!sptSet[v] && graph[u, v] != 0 &&
-                            dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
-                            dist[v] = dist[u] + graph[u, v];
-                    }
-                }
-
-                printSolution(dist, num);
-            }
-
-            public static void Main()
-            {
-                int[,] graph = new int[,] { { 0, 5, 0, 0, 0, 2, 0, 0, 0 },
-                                      { 4, 0, 8, 0, 0, 0, 0, 7, 0 },
-                                      { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
-                                      { 0, 0, 4, 0, 9, 14, 0, 0, 0 },
-                                      { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
-                                      { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
-                                      { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
-                                      { 8, 11, 0, 0, 3, 0, 0, 0, 7 },
-                                      { 0, 0, 0, 0, 5, 0, 6, 7, 0 } };
-                Dijkstra t = new Dijkstra();
-                t.dijkstra(graph, 0);
             }
         }
+
+        printSolution(dist);
     }
+
+    public static void Main()
+    {
+        int[,] graph = new int[,] {
+        { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+        { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+        { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
+        { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
+        { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
+        { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
+        { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
+        { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+        { 0, 0, 2, 0, 0, 0, 6, 7, 0 }
+    };
+
+        Dijkstra t = new Dijkstra();
+        t.dijkstra(graph, 0);
+    }
+}
 ```
 This is Dijkstra's path finding algorithm, it does not work. Its supposed to take points and allows ghosts to move around the map avoiding the walls. My ghosts don't respond to this at all.
 #### Game1
@@ -779,10 +780,7 @@ When any ghost comes in contact with Pac-Man they strop moving
 
 ### Pathfinding
 I decided to use dijkstras pathfinding algorithm for my game as I thought it would be less complex than using A* algorithm although it is more efficient
-
-My Dijkstras class does not work, I tried different approaches but I didn't leave myself enough time to fully work it out. With the way the pink ghost moves while the Pac-Man is moving the pink ghosts finds its way out of the starting position and if Pac-Man moves to the start position of the ghosts it can coax out the other ghosts.
-
-If I had more time i would put more effort into figuring out the pathfinding algorithm and making more features in the game to make it more attractive.
+My blue ghost is supposed to use dijkstras algorithm to navigate its way around the map and catch Pac-Man although my blue ghost does not respond at all.
 
 ### State Machine
 The orange ghost is supposed randomly moves around the map but when it comes in proximity with Pac-Man it switches to following Pac-Man. To do this I used a state machine with the different states being chase and random movement. The ghost starts with random movement and switches to chase when appropriate. Sadly the random movement does not work correctly but the chase does work and when the ghost is in proximity to Pac-Man the state machine successfully switches to the correct state and when the ghost get far enough away the state machine switches back to moving randomly.
@@ -794,32 +792,3 @@ I believe my code is very reusable. Each part of my coded is seperated appropria
 My Pac-Man games is incredibly exciting and entertaining with a map made from scratch. Ghosts are the original colours and mostly follow the original steering behaviours. Around the map there are some areas easier to manuever around and areas they ay be harder keeping the user on their toes.
 
 The walls in the map are a nice violet which constrasts the bright neon colours of the ghosts and the yellow of Pac-Man.
-
-
-
-### A Note
-my code is very laggy to run this is because of the following while loop in the Random Move class, if you want to check how to code runs in other areas you can comment out this code.
-```cs
-while (pos != ghost.Position)
-{
-
-    int num = rng.Next(0, 400);
-    int num2 = rng.Next(0, 800);
-    pos = new Vector2(num2, num);
-    var dir = pos - ghost.Position;
-
-    if (dir.Length() > 4)
-    {
-        dir.Normalize();
-        ghost.Position += dir * ghost.Speed * Globals.TotalSeconds;
-    }
-
-    foreach (Rectangle rectangle in _walls)
-    {
-        if (rectangle.Contains(ghost.Position))
-        {
-            ghost.Position = OldPosition;
-        }
-    }
-}
-```
